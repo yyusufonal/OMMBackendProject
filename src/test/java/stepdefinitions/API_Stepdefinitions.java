@@ -114,7 +114,7 @@ public class API_Stepdefinitions {
         jsonObjectRequest.put("category_id", 1);
         jsonObjectRequest.put("summary", "Blog Summary.");
         jsonObjectRequest.put("content", "Blog Content");
-        System.out.println("Post Body : " + jsonObjectRequest);
+
 
 
     }
