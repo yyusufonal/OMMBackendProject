@@ -1,5 +1,5 @@
 Feature: As a provider I want to be able to access blogs via API connection.
-
+  @API
   Scenario Outline: Verify that a GET request to /api/blogs with valid authorization returns status code 200,
   response_message “Blogs Listed Successfully”, and blog id(x) includes all expected blog fields.
 
