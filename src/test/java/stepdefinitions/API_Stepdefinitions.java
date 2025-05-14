@@ -116,7 +116,7 @@ public class API_Stepdefinitions {
         jsonObjectRequest.put("content", "Blog Content");
         System.out.println("Post Body : " + jsonObjectRequest);
 
-        addBlogPojoRequest = new AddBlogPojo("New Blog",1,"Summary","content");
+
     }
 
     @Given("The api user sends a POST request and saves the returned response.")
