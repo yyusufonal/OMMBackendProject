@@ -28,8 +28,8 @@ Feature:As a provider, I want to be able to access the shops via the API connect
     # Api kullanıcısı response body icindeki <dataIndex> indexe sahip olanin "<lang_id>", "<title>", "<slug>", "<tags>" ve "<summary>" bilgilerini doğrular.
 
     Examples:
-      | dataIndex | shop_code | shop_name | country_code| tax_allow | tax_number |contact_no|email          |address                        |country_name|state_name|city_name       |postal_code|
-      | 0         | SHOP4Q0CN5| FixIt Pros|             |  No       |            |2587456321|info@fixit.com |7990 California City Blvd      |USA (+1)    |California|California City |93505      |
+      | dataIndex | shop_code | shop_name    | country_code| tax_allow | tax_number |contact_no|email                 |address             |country_name|state_name   |city_name|postal_code|
+      | 0         | SHOP5GUZuT| Elegant Touch|             |  No       |            |2547896321|info@eleganttouch.com |9W6R+2C Boston      |USA (+1)    |Massachusetts|Boston   |96698      |
 
 
     Scenario: Verify that a GET request to the /api/myShops endpoint with an invalid API key returns a 401 Unauthorized

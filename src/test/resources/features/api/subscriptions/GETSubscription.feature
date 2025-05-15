@@ -12,12 +12,12 @@ Feature: As a provider, I should be able to access the detailed information of t
      # Api kullanicisi status codeun 200 oldugunu dogrular
      And The api user verifies that the "response.response_message" information in the response body is "Subscription Fee Details".
      # Api kullanicisi response bodydeki response_message bilgisinin "Blog  Details" oldugunu dogrular
-    Then The api user verifies the information in the response body for the entry with the specified <id> index , "<subscription_name>", "<fee>", "<currency_code>", "<duration>", "<fee_description>", "<subscription_content>", "<subscription_type>", "<status>" and "<type>".
+    Then The api user verifies the information in the response body for the entry with the specified <dataIndex> ,"<id>", "<subscription_name>", "<fee>", "<currency_code>", "<duration>", "<fee_description>", "<subscription_content>", "<subscription_type>", "<status>" and "<type>".
     # Api kullanıcısı response body icindeki <dataIndex> indexe sahip olanin <subscription_name>, <fee>, <currency_code>, <duration>, <fee_description>, <subscription_content>, <subscription_type>, <status>, <type>
 
     Examples:
-      |id         | subscription_name |fee   | currency_code |duration | fee_description    | subscription_content | subscription_type | status | type |
-      |1          | Basic              |99.99 |USD            | 12      |Annual Subscription | Only one shop        |1                  |1       |1     |
+      |dataIndex|id         | subscription_name |fee   | currency_code |duration | fee_description    | subscription_content | subscription_type | status | type |
+      |0        |1          | Premium           |99.99 |USD          | 12    |Annual Subscription     | Only one shop        |1                  |1       |1     |
 
 
   Scenario: Verify that a GET request to /api/blog/{id} without valid authorization and id returns status code 203 and
