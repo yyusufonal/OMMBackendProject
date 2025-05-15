@@ -32,7 +32,7 @@ public class SubscriptionStepdefinitions {
 	}
 
 	@Then("The api user verifies the information in the response body for the entry with the specified <dataIndex> index , {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
-	public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_data_ındex_index_and(String id, String subscription_name,String fee,  String currency_code, String duration, String fee_description , String subscription_content, String subscription_type, String status, String type) {
+	public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_data_index_index_and(String id, String subscription_name,String fee,  String currency_code, String duration, String fee_description , String subscription_content, String subscription_type, String status, String type) {
 		response.then()
 				.assertThat()
 				.body("data[0].id", equalTo(id),
