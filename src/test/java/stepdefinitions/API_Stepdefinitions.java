@@ -23,8 +23,9 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 public class API_Stepdefinitions {
+
+    public static Response response;
     JsonPath jsonPath;
-    Response response;
     String  exceptionMesaj;
     ConfigLoader configLoader = new ConfigLoader();
 
