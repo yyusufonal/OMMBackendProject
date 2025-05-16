@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import com.google.gson.JsonObject;
 import config_Requirements.ConfigLoader;
 import hooks.HooksAPI;
 import io.cucumber.java.bs.A;
@@ -28,6 +29,7 @@ public class API_Stepdefinitions {
     static JsonPath jsonPath;
     String  exceptionMesaj;
     ConfigLoader configLoader = new ConfigLoader();
+    JSONObject jsonObjectRequest = new JSONObject();
 
     @Given("The api user constructs the base url with the {string} token.")
     public void the_api_user_constructs_the_base_url_with_the_token(String user) {
@@ -78,6 +80,7 @@ public class API_Stepdefinitions {
 
             exceptionMesaj = e.getMessage();
         }
+        System.out.println("HATA MESAJI :" + exceptionMesaj);
         Assert.assertEquals(configLoader.getApiConfig("unauthorizedExceptionMessage"),exceptionMesaj);
 
     }
