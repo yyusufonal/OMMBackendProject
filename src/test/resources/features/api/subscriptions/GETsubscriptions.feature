@@ -24,12 +24,10 @@ Feature:  As a provider, I want to be able to access subscriptions via API conne
 
   Scenario: Verify that GET /api/subscriptions returns 401 status and correct error message with invalid authorization.
 
-    * The api user constructs the base url with the "invalid" token.
-    # Api kullanicisi "invalid" token ile base urli olusturur
-    * The api user sets "api/subscriptions" path parameters.
-    # Api kullanicisi "api/blogs" path parametrelerini olusturur
-    * The api user sends a GET request, saves the returned response, and verifies that the status code is '401' with the reason phrase Unauthorized.
-    # Api kullanicisi GET request gonderir, donen responsei kaydeder, status codeun '401' ve reason phrase bilgisinin Unauthorized oldugunu dogrular
+    Given The api user constructs the base url with the "invalid" token.
+    And The api user sets "api/subscriptions" path parameters.
+    When The api user sends a GET request, saves the returned response, and verifies that the status code is '401' with the reason phrase Unauthorized.
+
 
 
 
