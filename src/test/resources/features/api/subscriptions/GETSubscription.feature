@@ -1,5 +1,5 @@
 Feature: As a provider, I should be able to access the detailed information of the subscription with the specified id number through the API connection.
-  @API
+
   Scenario Outline: Verify that GET /api/subscription_details/{id} returns status 200, correct message, and complete subscription details for a valid request.
 
      Given The api user constructs the base url with the "provider" token.

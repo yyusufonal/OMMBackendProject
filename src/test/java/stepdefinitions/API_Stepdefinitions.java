@@ -25,7 +25,8 @@ import static org.hamcrest.Matchers.*;
 public class API_Stepdefinitions {
 
     public static Response response;
-    static JsonPath jsonPath;
+    public static JsonPath jsonPath;
+   // static JsonPath jsonPath;
     String  exceptionMesaj;
     ConfigLoader configLoader = new ConfigLoader();
 
