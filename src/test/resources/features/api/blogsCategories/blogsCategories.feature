@@ -1,10 +1,14 @@
-Feature: Blog Category List
+Feature: Add a New Blog Category
 
-  Scenario: Get blog category list with valid token
+  Background:
+    Given The API base URL is set
+    And I set the "Authorization" header to "SZk44qHV59wMIlUGa256"
 
-    * The API user sets base URL with valid provider token
-    * The API user sets path "/api/blogCategories"
-    * The API user sends a GET request to blogCategories endpoint
-    * The API user verifies that the status code is 200
-    * The API user verifies that the response_message is "Blog Categories Listed Successfully"
-    * The API user verifies that the response contains expected category fields
+  Scenario: Successfully add a new blog category
+    Given I have a new blog category with:
+      | name      | description               |
+      | Education | Articles about learning   |
+    When I send a POST request to "/api/addBlogCategory" with the blog category data
+    Then the response status code should be 200
+    And the response message should be "Blog Category added successfully"
+    And the response should contain "added_blog_category_id"
