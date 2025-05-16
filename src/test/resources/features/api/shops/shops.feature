@@ -1,6 +1,6 @@
-Feature:As a provider, I want to be able to access the shops via the API connection
+Feature:US_036 As a provider, I want to be able to access the shops via the API connection
 
-  Scenario: Ensure that a GET request to the /api/myShops endpoint with valid authorization returns
+  Scenario:TC001 Ensure that a GET request to the /api/myShops endpoint with valid authorization returns
             a 200 OK status and includes the message "Shops Listed Successfully"
 
     Given The api user constructs the base url with the "provider" token.
@@ -15,10 +15,10 @@ Feature:As a provider, I want to be able to access the shops via the API connect
     # Api kullanicisi response bodydeki response_message bilgisinin "Shops Listed Successfully" oldugunu dogrular
 
 
-  Scenario Outline: Verify that a GET request to /api/blogs with valid authorization returns status code 200,
+  Scenario Outline:TC002 Verify that a GET request to /api/blogs with valid authorization returns status code 200,
   response_message “Blogs Listed Successfully”, and blog id(x) includes all expected blog fields.
 
-    Given The api user constructs the base url with the "provider" token.
+    Given TC001 The api user constructs the base url with the "provider" token.
     # Api kullanicisi "provider" token ile base urli olusturur
     Then The api user sets "api/myShops" path parameters.
     # Api kullanicisi "api/blogs" path parametrelerini olusturur
@@ -32,7 +32,7 @@ Feature:As a provider, I want to be able to access the shops via the API connect
       | 0         | SHOP5GUZuT| Elegant Touch|             |  No       |            |2547896321|info@eleganttouch.com |9W6R+2C Boston      |USA (+1)    |Massachusetts|Boston   |96698      |
 
 
-    Scenario: Verify that a GET request to the /api/myShops endpoint with an invalid API key returns a 401 Unauthorized
+    Scenario: TC003 Verify that a GET request to the /api/myShops endpoint with an invalid API key returns a 401 Unauthorized
               status code and the response body includes the message "Invalid token or token missing."
 
       Given The api user constructs the base url with the "invalid" token.
