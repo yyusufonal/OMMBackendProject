@@ -26,7 +26,8 @@ import static org.hamcrest.Matchers.*;
 public class API_Stepdefinitions {
 
     public static Response response;
-    static JsonPath jsonPath;
+    public static JsonPath jsonPath;
+   // static JsonPath jsonPath;
     String  exceptionMesaj;
     ConfigLoader configLoader = new ConfigLoader();
     JSONObject jsonObjectRequest = new JSONObject();
@@ -48,7 +49,7 @@ public class API_Stepdefinitions {
                 .when()
                 .get(API_Methods.fullPath);
 
-        response.prettyPrint();
+       // response.prettyPrint();
 
 
     }
