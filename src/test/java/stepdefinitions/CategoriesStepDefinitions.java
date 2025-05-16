@@ -15,7 +15,7 @@ public class CategoriesStepDefinitions {
 
     @Given("The API user sets base URL with valid provider token")
     public void setBaseUrlWithToken() {
-        // tokeni sabit olarak ekliyoruz
+
         baseURI = baseUrl;
         requestSpecification = given()
                 .header("Authorization", "Bearer SZk44qHV59wMIlUGa256")
