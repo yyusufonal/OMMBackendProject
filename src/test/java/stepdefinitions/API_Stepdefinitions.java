@@ -49,7 +49,7 @@ public class API_Stepdefinitions {
                 .when()
                 .get(API_Methods.fullPath);
 
-       // response.prettyPrint();
+        response.prettyPrint();
 
 
     }
