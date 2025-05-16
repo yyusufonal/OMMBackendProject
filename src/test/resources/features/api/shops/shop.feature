@@ -1,6 +1,6 @@
 Feature: As a provider, I should be able to access the detailed information of the shop with the specified id number via the API connection.
 
-  @API
+
 Scenario:Verify that a GET request to /api/shop-details/{id} with valid authorization and correct ID
           returns status code 200,response_message “Shop Details”
 
