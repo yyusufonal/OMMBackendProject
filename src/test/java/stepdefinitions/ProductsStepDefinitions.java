@@ -14,6 +14,8 @@ import utilities.API_Utilities.API_Methods;
 
 import java.util.Map;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static stepdefinitions.API_Stepdefinitions.jsonPath;
 import static stepdefinitions.API_Stepdefinitions.response;
 
@@ -67,5 +69,36 @@ public class ProductsStepDefinitions {
                 .body(jsonObjectId.toString())
                 .get(API_Methods.fullPath);
         response.prettyPrint();
+    }
+
+
+    @And("The api user validates the {int} index, including {string}, {string}, {string}, {string},{string},{string},{string},{string},{string},{string},{string},{string} and {string},{string},{string},{string},{string},{string},{string},{string},{string},{string},{string} contents of the data in the response body.")
+    public void the_api_user_validates_the_index_including_and_contents_of_the_data_in_the_response_body(Integer dataIndex,String id, String user_id, String manufactured_by, String shop_id, String category, String subcategory, String product_name, String unit, String unit_name, String unit_value, String currency, String currency_code, String prices, String sales_price, String product_discount, String short_description, String description, String category_name, String subcategory_name, String shop_name, String price, String sale_price, String discount) {
+        jsonPath = response.jsonPath();
+
+
+        assertEquals(id, jsonPath.getString( "data.id"));
+        assertEquals(user_id, jsonPath.getString("data.user_id"));
+        assertEquals(manufactured_by, jsonPath.getString("data.manufactured_by"));
+        assertEquals(shop_id, jsonPath.getString("data.shop_id"));
+        assertEquals(category, jsonPath.getString( "data.category"));
+        assertEquals(subcategory, jsonPath.getString("data.subcategory"));
+        assertTrue(product_name, jsonPath.getString("data.product_name").contains("Tangle-Free"));
+        assertEquals(unit, jsonPath.getString("data.unit"));
+        assertEquals(unit_name, jsonPath.getString("data.unit_name"));
+        assertEquals(unit_value, jsonPath.getString("data.unit_value"));
+        assertEquals(currency, jsonPath.getString("data.currency"));
+        assertEquals(currency_code, jsonPath.getString("data.currency_code"));
+        assertEquals(prices, jsonPath.getString("data.prices"));
+        assertEquals(sales_price, jsonPath.getString("data.sales_price"));
+        assertEquals(product_discount, jsonPath.getString("data.product_discount"));
+        assertTrue(short_description, jsonPath.getString("data.short_description").contains("Jump Rope"));
+        assertTrue(description, jsonPath.getString("data.description").contains("This jump rope is made"));
+        assertEquals(category_name, jsonPath.getString("data.category_name").trim());
+        assertEquals(subcategory_name, jsonPath.getString("data.subcategory_name"));
+        assertEquals(shop_name, jsonPath.getString("data.shop_name"));
+        assertEquals(price, jsonPath.getString( "data.price"));
+        assertEquals(sale_price, jsonPath.getString(  "data.sale_price"));
+        assertEquals(discount, jsonPath.getString(  "data.discount"));
     }
 }
