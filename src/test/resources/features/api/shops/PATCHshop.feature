@@ -83,5 +83,17 @@ Feature:US_039 As a provider, I want to be able to update the information of the
       |id |
       |101|
 
+  Scenario Outline:TC007 – This test verifies that the user data in the response body is updated correctly and includes all required fields after the update.
+  (shop_title, description, contact_no, email, tax_allow, address, category, sub_category).
+
+    Given The api user constructs the base url with the "provider" token.
+    Then The api user sets "api/shop-details/<id>" path parameters.
+    When The api user sends a GET request and saves the returned response.
+    And The api user validates including "<shop_title>", "<description>", "<contact_no>", "<email>", <tax_allow>, "<address>", <category>, <sub_category> contents of the data in the response body.
+
+    Examples:
+      |id | shop_title      | description    | contact_no| email            | tax_allow |address          |category|sub_category|
+      |105|New Shop Updated | New Shop Desc  |12365478985|newshop@gmail.com |     1     |New York City,USA|   1    |    5       |
+    # BU SENARYODA HATA VAR HOCALARA SORULACAK
 
 

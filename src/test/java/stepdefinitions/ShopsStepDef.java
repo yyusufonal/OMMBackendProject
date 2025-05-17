@@ -180,4 +180,25 @@ public class ShopsStepDef {
         System.out.println("HATA MESAJI :" + exceptionMesaj);
         Assert.assertEquals(configLoader.getApiConfig("unauthorizedExceptionMessage"),exceptionMesaj);
     }
+
+    @When("The api user validates including {string}, {string}, {string}, {string}, {int}, {string}, {int}, {int} contents of the data in the response body.")
+    public void the_api_user_validates_including_contents_of_the_data_in_the_response_body(String shop_title, String description, String contact_no, String email, Integer tax_allow, String address, Integer category, Integer sub_category) {
+
+        jsonPath = response.jsonPath();
+
+
+        Assert.assertEquals(description,jsonPath.getString("data.description"));
+        Assert.assertEquals(contact_no,jsonPath.getString("data.contact_no"));
+        Assert.assertEquals(email,jsonPath.getString("data.email"));
+        Assert.assertEquals(tax_allow, Integer.valueOf(jsonPath.getInt("data.tax_allow")));
+        Assert.assertEquals(category, Integer.valueOf(jsonPath.getInt("data.category")));
+        Assert.assertEquals(sub_category, Integer.valueOf(jsonPath.getInt("data.sub_category")));
+        Assert.assertEquals(address,jsonPath.getString("data.address"));
+        Assert.assertEquals(shop_title,jsonPath.getString("data.shop_title"));
+
+
+    }
+
+
+
 }
