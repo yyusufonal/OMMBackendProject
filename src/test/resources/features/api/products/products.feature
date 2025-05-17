@@ -39,3 +39,8 @@ Feature: As a provider, I want to list my products and validate product details 
     Then The api user sends a GET request and user add body.
     Then The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "No shop this id or No product this shop.".
+
+  Scenario: AC5 - Invalid authorization token with valid shop_id
+    Given The api user constructs the base url with the "invalid" token.
+    Then The api user sets "api/myProducts" path parameters.
+    Then The api user sends a GET request, saves the returned response, and verifies that the status code is '401' with the reason phrase Unauthorized.

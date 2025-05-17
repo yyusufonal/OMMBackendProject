@@ -50,10 +50,22 @@ public class ProductsStepDefinitions {
     @When("the user sends a GET request to {string} without a shop_id")
     public void theUserSendsAGETRequestToWithoutAShop_id(String arg0) {
         jsonObjectId.put("shop_id","");
+        response =given()
+                .spec(HooksAPI.spec)
+                .when()
+                .body(jsonObjectId.toString())
+                .get(API_Methods.fullPath);
+        response.prettyPrint();
     }
 
     @When("the user sends a GET request to {string} with an unregistered shop_id")
-    public void theUserSendsAGETRequestToWithAnUnregisteredShop_id(String response) {
+    public void theUserSendsAGETRequestToWithAnUnregisteredShop_id(String arg01) {
         jsonObjectId.put("shop_id",89);
+        response =given()
+                .spec(HooksAPI.spec)
+                .when()
+                .body(jsonObjectId.toString())
+                .get(API_Methods.fullPath);
+        response.prettyPrint();
     }
 }
