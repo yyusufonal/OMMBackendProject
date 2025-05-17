@@ -65,6 +65,8 @@ public class Staff_Stepdefinitions {
                 .when()
                 .body(jsonObjectRequest.toString())
                 .post(API_Methods.fullPath);
+
+        response.prettyPrint();
     }
 
 

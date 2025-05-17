@@ -5,7 +5,7 @@ Feature: As a provider, I should be able to add a blog comment via API connectio
     * The api user constructs the base url with the "provider" token.
     * The api user sets "api/addBlogComment" path parameters.
     * The api user prepares a post request body to send to the api addBlogComment endpoint
-    * The api user sends a POST request and saves the returned response.
+    * The api user sends a POST request to addBlogComment and saves the returned response.
     * The api user verifies that the status code is 200.
     * The api user verifies that the "response.response_message" information in the response body is "Blog Comment added successfully".
 
@@ -16,7 +16,7 @@ Feature: As a provider, I should be able to add a blog comment via API connectio
     * The api user constructs the base url with the "provider" token.
     * The api user sets "api/addBlogComment" path parameters.
     * The api user prepares a post request body containing missing data to send to the api addBlogComment endpoint.
-    * The api user sends a POST request and saves the returned response.
+    * The api user sends a POST request to addBlogComment and saves the returned response.
     * The api user verifies that the status code is 203.
     * The api user verifies that the "response.response_message" information in the response body is "Post ID, email, name, and comment is required.".
 
@@ -25,7 +25,7 @@ Feature: As a provider, I should be able to add a blog comment via API connectio
     * The api user constructs the base url with the "provider" token.
     * The api user sets "api/addBlogComment" path parameters.
     * The api user prepares an empty POST request body.
-    * The api user sends a POST request and saves the returned response.
+    * The api user sends a POST request to addBlogComment and saves the returned response.
     * The api user verifies that the status code is 203.
     * The api user verifies that the "response.response_message" information in the response body is "Post ID, email, name, and comment is required.".
 
@@ -34,7 +34,7 @@ Feature: As a provider, I should be able to add a blog comment via API connectio
     * The api user constructs the base url with the "invalid" token.
     * The api user sets "api/addBlogComment" path parameters.
     * The api user prepares a POST request body with "<post_id>", "<name>", "<email>", "<comment>".
-    * The api user sends a POST request and saves the returned response.
+    * The api user sends a POST request to addBlogComment and saves the returned response.
     * The api user verifies that the status code is 401.
     * The api user verifies that the "response.response_message" information in the response body is "Invalid token or token missing".
 
