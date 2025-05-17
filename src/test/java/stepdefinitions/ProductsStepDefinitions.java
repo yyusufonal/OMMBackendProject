@@ -5,6 +5,7 @@ import hooks.HooksAPI;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.When;
 import org.json.JSONObject;
 import org.junit.Assert;
 import utilities.API_Utilities.API_Methods;
@@ -44,4 +45,13 @@ public class ProductsStepDefinitions {
     }
 
 
+    @When("the user sends a GET request to {string} without a shop_id")
+    public void theUserSendsAGETRequestToWithoutAShop_id(String arg0) {
+        jsonObjectId.put("shop_id","");
+    }
+
+    @When("the user sends a GET request to {string} with an unregistered shop_id")
+    public void theUserSendsAGETRequestToWithAnUnregisteredShop_id(String arg0) {
+        jsonObjectId.put("shop_id",89);
+    }
 }
