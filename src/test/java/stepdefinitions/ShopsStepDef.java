@@ -96,7 +96,9 @@ public class ShopsStepDef {
 
     @When("The api user prepares a post request body containing missing data to send to the api addShop endpoint.")
     public void theApiUserPreparesAPostRequestBodyContainingMissingDataToSendToTheApiAddShopEndpoint() {
-        jsonObjectRequest.put("shop_title", "New Shop");
+
+
+        jsonObjectRequest.put("shop_title", "New Shop Updated");
         jsonObjectRequest.put("description", "New Shop Desc");
         jsonObjectRequest.put("contact_no" , "12365478985");
         jsonObjectRequest.put("email" , "newshop@gmail.com");

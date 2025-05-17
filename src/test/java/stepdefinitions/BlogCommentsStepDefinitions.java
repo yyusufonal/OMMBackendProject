@@ -75,7 +75,7 @@ public class BlogCommentsStepDefinitions {
         Assert.assertEquals(user_id, json.getString("data[0].user_id"));
         Assert.assertEquals(email, json.getString("data[0].email"));
         Assert.assertEquals(name, json.getString("data[0].name"));
-        Assert.assertEquals(comment, json.getString("data[0].comment").trim());
+        Assert.assertEquals(comment, json.getString("data[0].comment"));
         Assert.assertEquals(ip_address, json.getString("data[0].ip_address"));
         Assert.assertEquals(status, json.getString("data[0].status"));
         Assert.assertEquals(created_at, json.getString("data[0].created_at"));
