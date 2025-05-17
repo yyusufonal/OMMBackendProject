@@ -104,4 +104,9 @@ public class ShopsStepDef {
         System.out.println("POST BODY :" + jsonObjectRequest);
 
     }
+
+    @When("The api user prepares a post request without any data to send to the api addShop endpoint.")
+    public void theApiUserPreparesAPostRequestWithoutAnyDataToSendToTheApiAddShopEndpoint() {
+
+    }
 }
