@@ -81,17 +81,6 @@ public class BlogCommentsStepDefinitions {
         Assert.assertEquals(created_at, json.getString("data[0].created_at"));
     }
 
-    @Then("The api user sends a POST request and saves the returned response.")
-    public void the_api_user_sends_a_post_request_and_saves_the_returned_response() {
-
-
-        API_Stepdefinitions.response = given()
-                .spec(HooksAPI.spec)
-                .contentType(ContentType.JSON)
-                .when()
-                .body(jsonObjectRequest.toString())
-                .post(API_Methods.fullPath);
-    }
 
     @Given("The api user prepares a post request body to send to the api addBlogComment endpoint")
     public void the_api_user_prepares_a_post_request_body_to_send_to_the_api_add_blog_comment_endpoint() {
@@ -103,7 +92,7 @@ public class BlogCommentsStepDefinitions {
         System.out.println("Valid POST body for addBlogComment: " + jsonObjectRequest);
 
 
-    AddBlogPojo addBlogPojoRequest = new AddBlogPojo("New Blog", 1, "Summary", "content");
+
     }
     @Given("The api user sends a POST request to addBlogComment and saves the returned response.")
     public void the_api_user_sends_a_post_request_to_add_blog_comment_and_saves_the_returned_response() {
