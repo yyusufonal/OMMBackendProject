@@ -43,6 +43,7 @@ public class ProductsStepDefinitions {
     public void the_api_user_verifies_that_the_information_in_the_response_body_is_and(String id, String string2, String string3, String string4, String string5, String string6, String string7, String string8, String string9, String string10, String string11, String string12, String string13) {
         jsonPath = response.jsonPath();
         jsonPath.prettyPrint();
+        System.out.println(jsonObjectId);
     }
 
 
