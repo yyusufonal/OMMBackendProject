@@ -101,4 +101,9 @@ public class ProductsStepDefinitions {
         assertEquals(sale_price, jsonPath.getString(  "data.sale_price"));
         assertEquals(discount, jsonPath.getString(  "data.discount"));
     }
+
+    @When("the user sends a GET request to {string} with an unregistered productid")
+    public void theUserSendsAGETRequestToWithAnUnregisteredProductid(String arg0) {
+        jsonObjectId.put("shop_id",999);
+    }
 }
