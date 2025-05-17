@@ -211,4 +211,17 @@ public class ProductsStepDefinitions {
     public void theApiUserPreparesAPatchRequestBodyToSendToEmptyDataTheApiEditProductEndpoint() {
         jsonObjectRequest = new JSONObject();
     }
+
+    @Then("The api user verifies that the {string} information in the responsee body is {string}.")
+    public void theApiUserVerifiesThatTheInformationInTheResponseeBodyIs(String key, String value) {
+        try {
+            response.then()
+                    .assertThat()
+                    .body(key,equalTo(value));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("HATA MESAJI :" + exceptionMesaj);
+        Assert.assertEquals(configLoader.getApiConfig("unauthorizedExceptionMessage"),exceptionMesaj);
+    }
 }
