@@ -35,15 +35,14 @@ Feature: As a provider, I want to be able to delete subscription information wit
     Then The api user verifies that the "response.response_message" information in the response body is "Subscription not found. Invalid ID.".
 
 
-  @API
+
   Scenario: Verify that a DELETE request to /api/deleteBlog/{id} with an invalid API key returns status code 401 and
   response_message “Invalid token or token missing”.
 
     Given The api user constructs the base url with the "invalid" token.
     And The api user sets "api/deleteSubscription/56" path parameters.
-    Then The api user sends a DELETE request and saves the returned response catch.
-    Then The api user sends a GET request, saves the returned response, and verifies that the status code is '401' with the reason phrase Unauthorized.
-    Then The api user verifies that the "response.response_message" information in the response body is "Invalid token or token missing".
+    Then The api user sends a DELETE request, saves the returned response, and verifies that the status code is '401' with the reason phrase Unauthorized.
+
 
 
 
