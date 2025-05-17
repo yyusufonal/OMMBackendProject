@@ -206,4 +206,9 @@ public class ProductsStepDefinitions {
                 .assertThat()
                 .body(key,equalTo(value));
     }
+
+    @When("The api user prepares a patch request body to send to empty data the api editProduct endpoint")
+    public void theApiUserPreparesAPatchRequestBodyToSendToEmptyDataTheApiEditProductEndpoint() {
+        jsonObjectRequest = new JSONObject();
+    }
 }
