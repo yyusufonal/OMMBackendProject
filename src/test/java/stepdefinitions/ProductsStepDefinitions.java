@@ -16,6 +16,7 @@ import utilities.API_Utilities.API_Methods;
 
 import java.util.Map;
 
+import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -164,5 +165,45 @@ public class ProductsStepDefinitions {
         jsonObjectRequest.put("manufactured_by", "");
 
         System.out.println("Request Body: " + jsonObjectRequest.toString());
+    }
+
+    @When("The api user prepares a patch request body to send to the api editProduct endpoint")
+    public void theApiUserPreparesAPatchRequestBodyToSendToTheApiEditProductEndpoint() {
+
+
+        jsonObjectRequest.put("product_name", "New Test Product");
+        jsonObjectRequest.put("price", 200);
+        jsonObjectRequest.put("short_description", "Test Short Desc.");
+        jsonObjectRequest.put("description", "Test Desc");
+
+
+        System.out.println("Request Body: " + jsonObjectRequest.toString());
+    }
+
+    @Then("The api user sends a PATCHH request and save the returned response.")
+    public void theApiUserSendsAPATCHHRequestAndSaveTheReturnedResponse() {
+        response =given()
+                .spec(HooksAPI.spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObjectRequest.toString())
+                .patch(API_Methods.fullPath);
+
+        response.prettyPrint();
+    }
+
+    @When("The api user verifies that the statusS code is {int}.")
+    public void theApiUserVerifiesThatTheStatusSCodeIs(int code) {
+        response.then()
+                .assertThat()
+                .statusCode(code);
+    }
+
+
+    @Then("The api user verifies that the {string} information in the responses body is {string}.")
+    public void theApiUserVerifiesThatTheInformationInTheResponsesBodyIs(String key, String value) {
+        response.then()
+                .assertThat()
+                .body(key,equalTo(value));
     }
 }
