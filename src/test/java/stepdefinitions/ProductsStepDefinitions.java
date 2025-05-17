@@ -5,7 +5,9 @@ import hooks.HooksAPI;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.json.JSONObject;
 import org.junit.Assert;
@@ -16,15 +18,15 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static stepdefinitions.API_Stepdefinitions.jsonPath;
-import static stepdefinitions.API_Stepdefinitions.response;
 
 
 import static io.restassured.RestAssured.given;
+import static stepdefinitions.API_Stepdefinitions.*;
 
 public class ProductsStepDefinitions {
 
     JSONObject jsonObjectId = new JSONObject();
+    JSONObject jsonObjectRequest = new JSONObject();
 
     @Given("The user add body parameters shopId")
     public void the_user_add_body_parameters_shop_id() {
@@ -106,5 +108,61 @@ public class ProductsStepDefinitions {
     public void theUserSendsAGETRequestToWithAnUnregisteredProductid(String arg0) {
         jsonObjectId.put("shop_id",999);
         System.out.println(jsonObjectId);
+    }
+
+    @Then("The api user prepares a post request body to send to the api addProduct endpoint")
+    public void theApiUserPreparesAPostRequestBodyToSendToTheApiAddProductEndpoint() {
+        JSONObject jsonObjectRequest = new JSONObject();
+
+        jsonObjectRequest.put("shop_id", 5);
+        jsonObjectRequest.put("category", 1);
+        jsonObjectRequest.put("subcategory", 2);
+        jsonObjectRequest.put("product_name", "New Test Product");
+        jsonObjectRequest.put("unit_value", 50);
+        jsonObjectRequest.put("unit", 2);
+        jsonObjectRequest.put("price", 200);
+        jsonObjectRequest.put("discount", 0);
+        jsonObjectRequest.put("sale_price", 200);
+        jsonObjectRequest.put("short_description", "Test Short Desc.");
+        jsonObjectRequest.put("description", "Test Desc");
+        jsonObjectRequest.put("manufactured_by", "QuickHand Solitions");
+
+        System.out.println("Request Body: " + jsonObjectRequest.toString());
+    }
+
+    @Then("The api user sends a POST request and saves the returned responses")
+    public void theApiUserSendsAPOSTRequestAndSavesTheReturnedResponses() {
+        response= given()
+                .spec(HooksAPI.spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObjectRequest.toString())
+                .post(API_Methods.fullPath);
+
+        response.prettyPrint();
+    }
+
+    @When("The api user prepares a post request body with missing required fields to send to the api addProduct endpoint")
+    public void theApiUserPreparesAPostRequestBodyWithMissingRequiredFieldsToSendToTheApiAddProductEndpoint() {
+        jsonObjectRequest = new JSONObject();
+
+    }
+
+    @Given("The api user prepares an empty POST request body")
+    public void theApiUserPreparesAnEmptyPOSTRequestBody() {
+        jsonObjectRequest.put("shop_id", "");
+        jsonObjectRequest.put("category", "");
+        jsonObjectRequest.put("subcategory", "");
+        jsonObjectRequest.put("product_name", "");
+        jsonObjectRequest.put("unit_value", "");
+        jsonObjectRequest.put("unit", "");
+        jsonObjectRequest.put("price", "");
+        jsonObjectRequest.put("discount", "");
+        jsonObjectRequest.put("sale_price", "");
+        jsonObjectRequest.put("short_description", "");
+        jsonObjectRequest.put("description", "");
+        jsonObjectRequest.put("manufactured_by", "");
+
+        System.out.println("Request Body: " + jsonObjectRequest.toString());
     }
 }
