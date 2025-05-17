@@ -105,5 +105,6 @@ public class ProductsStepDefinitions {
     @When("the user sends a GET request to {string} with an unregistered productid")
     public void theUserSendsAGETRequestToWithAnUnregisteredProductid(String arg0) {
         jsonObjectId.put("shop_id",999);
+        System.out.println(jsonObjectId);
     }
 }

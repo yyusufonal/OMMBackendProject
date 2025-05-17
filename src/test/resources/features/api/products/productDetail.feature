@@ -24,10 +24,15 @@ Feature: API_US057 - Product detail retrieval through API
     Then The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "Id missing".
 
-  Scenario: TC003 - Invalid authorization
-    Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/product-details/999" path parameters.
     When the user sends a GET request to "/api/product-details/999" with an unregistered productid
     Then The api user sends a GET request and user add body.
     Then The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "No Details found".
+
+
+  Scenario: TC003 - Invalid authorization
+    Given The api user constructs the base url with the "invalid" token.
+    Then The api user sets "api/product-details/11" path parameters.
+    Then The api user sends a GET request, saves the returned response, and verifies that the status code is '401' with the reason phrase Unauthorized.
+
