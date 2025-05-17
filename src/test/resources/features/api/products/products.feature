@@ -1,6 +1,6 @@
 Feature: As a provider, I want to list my products and validate product details via API connection.
 
-  Scenario: [TC001 → API_US056] When a valid authorization token and correct shop_id are sent in a GET request to the /api/myProducts endpoint,
+  Scenario: When a valid authorization token and correct shop_id are sent in a GET request to the /api/myProducts endpoint,
   the status code should be 200, and the response_message should be "Products Listed Successfully".
 
   #AC1: When a valid authorization token and correct shop_id are sent in a GET request to the /api/myProducts endpoint,

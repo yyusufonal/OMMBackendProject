@@ -6,6 +6,7 @@ import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
+import io.restassured.path.json.JsonPath;
 import org.json.JSONObject;
 import org.junit.Assert;
 import utilities.API_Utilities.API_Methods;
@@ -24,7 +25,7 @@ public class ProductsStepDefinitions {
     JSONObject jsonObjectId = new JSONObject();
 
     @Given("The user add body parameters shopId")
-    public void the_user_add_body_parameters_shop_ıd() {
+    public void the_user_add_body_parameters_shop_id() {
         jsonObjectId.put("shop_id", 5);
     }
 
@@ -51,7 +52,7 @@ public class ProductsStepDefinitions {
     }
 
     @When("the user sends a GET request to {string} with an unregistered shop_id")
-    public void theUserSendsAGETRequestToWithAnUnregisteredShop_id(String arg0) {
+    public void theUserSendsAGETRequestToWithAnUnregisteredShop_id(String response) {
         jsonObjectId.put("shop_id",89);
     }
 }
