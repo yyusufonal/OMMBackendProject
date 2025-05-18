@@ -2,26 +2,25 @@ package stepdefinitions;
 
 import config_Requirements.ConfigLoader;
 import hooks.HooksAPI;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.Assert;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 import org.json.JSONObject;
 import utilities.API_Utilities.API_Methods;
 import static org.hamcrest.Matchers.equalTo;
-import pojos.AddBlogPojo;
-import java.util.HashMap;
-import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.stringContainsInOrder;
+import static org.junit.Assert.assertEquals;
 import static stepdefinitions.API_Stepdefinitions.response;
 
 public class BlogCommentsStepDefinitions {
 
+    int extractedId;
     JSONObject jsonObjectRequest = new JSONObject();
     JsonPath jsonPath;
     String exceptionMesaj;
@@ -31,14 +30,14 @@ public class BlogCommentsStepDefinitions {
     public void the_api_user_verifies_the_blog_comment_fields(int dataIndex, String post_id, String user_id, String email, String name, String comment, String ip_address, String status, String created_at) {
         jsonPath = response.jsonPath();
 
-        Assert.assertEquals(post_id, jsonPath.getString("data.blogs[" + dataIndex + "].post_id"));
-        Assert.assertEquals(user_id, jsonPath.getString("data.blogs[" + dataIndex + "].user_id"));
-        Assert.assertEquals(email, jsonPath.getString("data.blogs[" + dataIndex + "].email"));
-        Assert.assertEquals(name, jsonPath.getString("data.blogs[" + dataIndex + "].name"));
-        Assert.assertEquals(comment, jsonPath.getString("data.blogs[" + dataIndex + "].comment").trim());
-        Assert.assertEquals(ip_address, jsonPath.getString("data.blogs[" + dataIndex + "].ip_address"));
-        Assert.assertEquals(status, jsonPath.getString("data.blogs[" + dataIndex + "].status"));
-        Assert.assertEquals(created_at, jsonPath.getString("data.blogs[" + dataIndex + "].created_at"));
+        assertEquals(post_id, jsonPath.getString("data.blogs[" + dataIndex + "].post_id"));
+        assertEquals(user_id, jsonPath.getString("data.blogs[" + dataIndex + "].user_id"));
+        assertEquals(email, jsonPath.getString("data.blogs[" + dataIndex + "].email"));
+        assertEquals(name, jsonPath.getString("data.blogs[" + dataIndex + "].name"));
+        assertEquals(comment, jsonPath.getString("data.blogs[" + dataIndex + "].comment").trim());
+        assertEquals(ip_address, jsonPath.getString("data.blogs[" + dataIndex + "].ip_address"));
+        assertEquals(status, jsonPath.getString("data.blogs[" + dataIndex + "].status"));
+        assertEquals(created_at, jsonPath.getString("data.blogs[" + dataIndex + "].created_at"));
     }
 
     @Given("The api user sets path parameter with blogComment id {int}")
@@ -70,15 +69,15 @@ public class BlogCommentsStepDefinitions {
 
         JsonPath json = response.jsonPath();
 
-        Assert.assertEquals(data_id, json.getString("data[0].id"));
-        Assert.assertEquals(post_id, json.getString("data[0].post_id"));
-        Assert.assertEquals(user_id, json.getString("data[0].user_id"));
-        Assert.assertEquals(email, json.getString("data[0].email"));
-        Assert.assertEquals(name, json.getString("data[0].name"));
-        Assert.assertEquals(comment, json.getString("data[0].comment"));
-        Assert.assertEquals(ip_address, json.getString("data[0].ip_address"));
-        Assert.assertEquals(status, json.getString("data[0].status"));
-        Assert.assertEquals(created_at, json.getString("data[0].created_at"));
+        assertEquals(data_id, json.getString("data[0].id"));
+        assertEquals(post_id, json.getString("data[0].post_id"));
+        assertEquals(user_id, json.getString("data[0].user_id"));
+        assertEquals(email, json.getString("data[0].email"));
+        assertEquals(name, json.getString("data[0].name"));
+        assertEquals(comment, json.getString("data[0].comment"));
+        assertEquals(ip_address, json.getString("data[0].ip_address"));
+        assertEquals(status, json.getString("data[0].status"));
+        assertEquals(created_at, json.getString("data[0].created_at"));
     }
 
 
@@ -113,7 +112,7 @@ public class BlogCommentsStepDefinitions {
     }
     @Given("The api user prepares an empty POST request body.")
     public void the_api_user_prepares_an_empty_post_request_body() {
-        jsonObjectRequest = new JSONObject(); // tamamen boş
+        jsonObjectRequest = new JSONObject();
         System.out.println("Empty POST body: " + jsonObjectRequest);
     }
     @Given("The api user prepares a POST request body with {string}, {string}, {string}, {string}.")
@@ -126,5 +125,53 @@ public class BlogCommentsStepDefinitions {
 
         System.out.println("POST body: " + jsonObjectRequest);
     }
+    @When("The api user prepares a patch request body to send to the api editBlogComment endpoint")
+    public void the_api_user_prepares_a_patch_request_body_to_send_to_api_editblogcomment_endpoint() {
+
+        jsonObjectRequest.put("name", "Anthony");
+        jsonObjectRequest.put("email", "anthony@gmail.com");
+        jsonObjectRequest.put("comment", "Please write more about this topic. Updated comment.");
+
+        System.out.println("Request Body: " + jsonObjectRequest.toString());
+    }
+    @Then("The api user sends a PATCH request and records the response.")
+    public void the_api_user_sends_a_patch_request_and_records_the_response() {
+
+        response = given()
+                .spec(HooksAPI.spec)
+                .contentType(ContentType.JSON)
+                .body(jsonObjectRequest.toString())
+                .when()
+                .patch(API_Methods.fullPath);
+
+        response.prettyPrint();
+    }
+    @When("The api user prepares a patch request body with no data to send to the api editBlogComment endpoint.")
+    public void the_api_user_prepares_patch_body_with_no_data_to_send_to_edit_BlogCommentEndpoint() {
+
+        jsonObjectRequest = new JSONObject();
+
+        System.out.println("PATCH Body (empty): " + jsonObjectRequest);
+    }
+
+    @Then("The api user sends a PATCH request with no datas and save the returned response.")
+    public void the_api_user_sends_a_patch_request_with_no_datas_and_save_the_returned_response() {
+        response = given()
+                .spec(HooksAPI.spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObjectRequest.toString())
+                .patch(API_Methods.fullPath);
+
+        response.prettyPrint();
+    }
+    @Then("The api user verifies that the comment information is {string}")
+    public void the_api_user_verifies_that_the_comment_information_is(String value) {
+        response.then()
+                .assertThat()
+                .body("data[0].comment",equalTo(value));
+    }
+
+
 
 }
