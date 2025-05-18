@@ -29,6 +29,16 @@ public class ProductsStepDefinitions {
     JSONObject jsonObjectId = new JSONObject();
     JSONObject jsonObjectRequest = new JSONObject();
 
+    @Given("The api user constructs the base url with the {string} tokenN.")
+    public void theApiUserConstructsTheBaseUrlWithTheTokenN(String user) {
+        HooksAPI.setUpApi(user);
+    }
+
+    @Then("The api user sets {string} path parametersS.")
+    public void theApiUserSetsPathParametersS(String pathParam) {
+        API_Methods.pathParam(pathParam);
+    }
+
     @Given("The user add body parameters shopId")
     public void the_user_add_body_parameters_shop_id() {
         jsonObjectId.put("shop_id", 5);
@@ -113,7 +123,6 @@ public class ProductsStepDefinitions {
 
     @Then("The api user prepares a post request body to send to the api addProduct endpoint")
     public void theApiUserPreparesAPostRequestBodyToSendToTheApiAddProductEndpoint() {
-        JSONObject jsonObjectRequest = new JSONObject();
 
         jsonObjectRequest.put("shop_id", 5);
         jsonObjectRequest.put("category", 1);
@@ -139,14 +148,12 @@ public class ProductsStepDefinitions {
                 .when()
                 .body(jsonObjectRequest.toString())
                 .post(API_Methods.fullPath);
-
         response.prettyPrint();
     }
 
     @When("The api user prepares a post request body with missing required fields to send to the api addProduct endpoint")
     public void theApiUserPreparesAPostRequestBodyWithMissingRequiredFieldsToSendToTheApiAddProductEndpoint() {
         jsonObjectRequest = new JSONObject();
-
     }
 
     @Given("The api user prepares an empty POST request body")
@@ -167,15 +174,24 @@ public class ProductsStepDefinitions {
         System.out.println("Request Body: " + jsonObjectRequest.toString());
     }
 
+    @Then("The api user sends a POSTT request and saves the returned responses")
+    public void theApiUserSendsAPOSTTRequestAndSavesTheReturnedResponses() {
+        response= given()
+                .spec(HooksAPI.spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObjectRequest.toString())
+                .post(API_Methods.fullPath);
+        response.prettyPrint();
+    }
+
     @When("The api user prepares a patch request body to send to the api editProduct endpoint")
     public void theApiUserPreparesAPatchRequestBodyToSendToTheApiEditProductEndpoint() {
-
 
         jsonObjectRequest.put("product_name", "New Test Product");
         jsonObjectRequest.put("price", 200);
         jsonObjectRequest.put("short_description", "Test Short Desc.");
         jsonObjectRequest.put("description", "Test Desc");
-
 
         System.out.println("Request Body: " + jsonObjectRequest.toString());
     }
@@ -223,5 +239,12 @@ public class ProductsStepDefinitions {
         }
         System.out.println("HATA MESAJI :" + exceptionMesaj);
         Assert.assertEquals(configLoader.getApiConfig("unauthorizedExceptionMessage"),exceptionMesaj);
+    }
+
+    @Then("The api user verifies that the {string} informationN in the response body is {string}.")
+    public void theApiUserVerifiesThatTheInformationNInTheResponseBodyIs(String key, String value) {
+        response.then()
+                .assertThat()
+                .body(key,equalTo(value));
     }
 }
