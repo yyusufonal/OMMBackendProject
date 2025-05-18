@@ -1,5 +1,6 @@
 Feature: API_US059 - Product update and verification through API
 
+  #AC1-#AC6-#AC7
   Scenario Outline: TC001 - Successful product update and post-update verification
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/editProduct/<id>" path parameters.
@@ -15,6 +16,7 @@ Feature: API_US059 - Product update and verification through API
       |id |
       |55|
 
+    #AC2
     Scenario Outline: TC002 - Update request with missing data
       Given The api user constructs the base url with the "provider" token.
       Then The api user sets "api/editProduct/<id>" path parameters.
@@ -27,6 +29,7 @@ Feature: API_US059 - Product update and verification through API
         |id |
         |55|
 
+  #AC3-#AC4
   Scenario Outline: TC003 - Update request with missing data
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/editProduct" path parameters.
@@ -46,6 +49,7 @@ Feature: API_US059 - Product update and verification through API
       |id |
       |88587|
 
+    #AC5
     Scenario: TC004 - Update request with invalid authorization
       Given The api user constructs the base url with the "invalid" token.
       Then The api user sets "api/editProduct" path parameters.

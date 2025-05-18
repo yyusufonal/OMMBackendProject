@@ -19,6 +19,7 @@ Feature: API_US058 - As a provider, I want to be able to create a new product re
     |id|
     |76|
 
+  #AC2
   Scenario: TC002 - Product creation with missing or empty data
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/addProduct" path parameters.
@@ -27,12 +28,14 @@ Feature: API_US058 - As a provider, I want to be able to create a new product re
     Then The api user verifies that the status code is 203.
     Then The api user verifies that the "response.response_message" information in the response body is "Add product failed, required fields empty.".
 
+    #AC3
     Given The api user constructs the base url with the "provider" token.
     Given The api user prepares an empty POST request body
     Then The api user sets "api/addProduct" path parameters.
     Then The api user verifies that the status code is 203.
     Then The api user verifies that the "response.response_message" information in the response body is "Add product failed, required fields empty.".
 
+  #AC4
   Scenario: TC003 - Invalid authorization token with valid product data
     Given The api user constructs the base url with the "invalid" token.
     Then The api user sets "api/addProduct" path parameters.

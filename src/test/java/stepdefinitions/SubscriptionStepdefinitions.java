@@ -150,6 +150,8 @@ public class SubscriptionStepdefinitions {
 		jsonPath = response.jsonPath();
 		int dataKey = Integer.parseInt(jsonPath.getString(key));
 		Assert.assertEquals(dataKey,API_Methods.id);
+		System.out.println("→ Response value  : " + dataKey);
+		System.out.println("→ Path parameter  : " + API_Methods.id);
 	}
 
 	@Then("The api user prepares a patch request that does not contain any data to send to the api editBlog endpoint.")
