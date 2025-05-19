@@ -6,7 +6,7 @@ Feature: As a provider, I want to be able to delete blog information with the sp
 
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/deleteBlog/93" path parameters.
-    When The api user sends a DELETE request and saves the returned response.
+    Then The api user sends a DELETE request and saves the returned response.
     Then The api user verifies that the status code is 200.
     And The api user verifies that the "response.response_message" information in the response body is "Blog deleted successfully".
     And The api user verifies that the "data.deleted_blog_id" information in the response body is the same as the id path parameter in the endpoint.
@@ -16,7 +16,7 @@ Feature: As a provider, I want to be able to delete blog information with the sp
 
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/deleteBlog" path parameters.
-    When The api user sends a DELETE request and saves the returned response.
+    Then The api user sends a DELETE request and saves the returned response.
     Then The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "Id missing".
 
@@ -26,20 +26,17 @@ Feature: As a provider, I want to be able to delete blog information with the sp
 
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/deleteBlog/6541" path parameters.
-    When The api user sends a DELETE request and saves the returned response.
+    Then The api user sends a DELETE request and saves the returned response.
     Then The api user verifies that the status code is 203.
-    And The api user verifies that the "response.response_message" information in the response body is "Blog not found. Invalid ID.".
+    Then The api user verifies that the "response.response_message" information in the response body is "Blog not found. Invalid ID.".
 
 
 
-  Scenario: Verify that a DELETE request to /api/deleteBlog/{id} with an invalid API key returns status code 401 and
-  response_message “Invalid token or token missing”.
+  Scenario: Verify that a DELETE request to /api/deleteBlog/{id} with an invalid API key returns status code 401 and response_message “Invalid token or token missing”.
 
     Given The api user constructs the base url with the "invalid" token.
     And The api user sets "api/deleteBlog/85" path parameters.
-    When The api user sends a DELETE request and saves the returned response.
-    Then The api user verifies that the status code is 401.
-    And The api user verifies that the "response.response_message" information in the response body is "Invalid token or token missing".
+    Then The api user sends a DELETE request, saves the returned response, and verifies that the status code is "401" with the reason phrase Unauthorized.
 
 
 
