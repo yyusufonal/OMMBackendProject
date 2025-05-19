@@ -45,5 +45,3 @@ Feature: As a provider, I should be able to access the detailed information of t
     Then The api user sends a POST request and saves the returned response.
     Then The api user verifies that the status code is 401.
     And The api user verifies that the "response.response_message" information in the response body is "Invalid token or token missing".
-
-
