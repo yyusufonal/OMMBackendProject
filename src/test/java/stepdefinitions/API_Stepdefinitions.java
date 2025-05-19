@@ -28,9 +28,9 @@ public class API_Stepdefinitions {
     public static Response response;
     public static JsonPath jsonPath;
    // static JsonPath jsonPath;
-    String  exceptionMesaj;
-    ConfigLoader configLoader = new ConfigLoader();
-    JSONObject jsonObjectRequest = new JSONObject();
+    public static String  exceptionMesaj;
+    public static ConfigLoader configLoader = new ConfigLoader();
+    public static JSONObject jsonObjectRequest = new JSONObject();
 
     @Given("The api user constructs the base url with the {string} token.")
     public void the_api_user_constructs_the_base_url_with_the_token(String user) {
@@ -84,6 +84,31 @@ public class API_Stepdefinitions {
         System.out.println("HATA MESAJI :" + exceptionMesaj);
         Assert.assertEquals(configLoader.getApiConfig("unauthorizedExceptionMessage"),exceptionMesaj);
 
+    }
+
+    @Then("The api user sends a DELETE request and saves the returned response.")
+    public void the_api_user_sends_a_delete_request_and_saves_the_returned_response() {
+       response = given()
+               .spec(HooksAPI.spec)
+               .when()
+               .delete(API_Methods.fullPath);
+
+       response.prettyPrint();
+    }
+
+    @Then("The api user sends a DELETE request, saves the returned response, and verifies that the status code is {string} with the reason phrase Unauthorized.")
+    public void the_api_user_sends_a_delete_request_saves_the_returned_response_and_verifies_that_the_status_code_is_with_the_reason_phrase_unauthorized(String string) {
+        try {
+            response =given()
+                    .spec(HooksAPI.spec)
+                    .when()
+                    .delete(API_Methods.fullPath);
+        } catch (Exception e) {
+
+            exceptionMesaj = e.getMessage();
+        }
+        System.out.println("HATA MESAJI :" + exceptionMesaj);
+        Assert.assertEquals(configLoader.getApiConfig("unauthorizedExceptionMessage"),exceptionMesaj);
     }
 
 
