@@ -108,8 +108,8 @@ public class Staff_Stepdefinitions {
     @When("The api user prepares a patch request body to send to the api editStaff endpoint")
     public void theApiUserPreparesAPatchRequestBodyToSendToTheApiEditStaffEndpoint() {
         jsonObjectRequest.put("firstname", "Updated Name");
-        jsonObjectRequest.put("mobileno", "5551234567");
-        jsonObjectRequest.put("email", "updatedstaff@gmail.com");
+        jsonObjectRequest.put("mobileno", "5551234967");
+        jsonObjectRequest.put("email", "updatedstafff@gmail.com");
         jsonObjectRequest.put("gender", "female");
         jsonObjectRequest.put("shop_id", 10);
         jsonObjectRequest.put("about_emp", "Updated employee info");
@@ -128,6 +128,15 @@ public class Staff_Stepdefinitions {
                 .patch(API_Methods.fullPath);
 
         response.prettyPrint();
+    }
+
+    @When("The api user prepares a patch request body to send to the api editStaff endpointt")
+    public void theApiUserPreparesAPatchRequestBodyToSendToTheApiEditStaffEndpointt() {
+        jsonObjectRequest.put("firstname", "Updated Name");
+        jsonObjectRequest.put("mobileno", "5551234967");
+
+
+        System.out.println("JSON BODY : ==> " + jsonObjectRequest);
     }
 
 
