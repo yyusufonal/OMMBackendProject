@@ -1,7 +1,7 @@
 Feature: As a provider, I want to be able to delete subscription information with the specified ID number via the API connection
 
 
-  Scenario: Verify that a DELETE request to /api/deleteBlog/{id} with valid authorization and correct id returns status
+  Scenario: Verify that a DELETE request to /api/deleteSubscription/{id} with valid authorization and correct id returns status
   code 200, response_message “Blog deleted successfully”, and that deleted_blog_id in the response matches the path
   parameter id.
 
@@ -14,7 +14,7 @@ Feature: As a provider, I want to be able to delete subscription information wit
 
 
 
-  Scenario: Verify that a DELETE request to /api/deleteBlog/{id} with valid authorization but missing id returns status
+  Scenario: Verify that a DELETE request to /api/deleteSubscription/{id} with valid authorization but missing id returns status
   code 203 and response_message “Id missing”.
 
     Given The api user constructs the base url with the "provider" token.
@@ -25,8 +25,8 @@ Feature: As a provider, I want to be able to delete subscription information wit
 
 
 
-  Scenario: Verify that a DELETE request to /api/deleteBlog/{id} with valid authorization and a non-existent id returns
-  status code 203 and response_message “Blog not found. Invalid ID.”
+  Scenario: Verify that a DELETE request to /api/deleteSubscription/{id} with valid authorization and a non-existent id returns
+  status code 203 and response_message “Subscription not found. Invalid ID.”
 
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/deleteSubscription/6541" path parameters.
@@ -36,7 +36,7 @@ Feature: As a provider, I want to be able to delete subscription information wit
 
 
 
-  Scenario: Verify that a DELETE request to /api/deleteBlog/{id} with an invalid API key returns status code 401 and
+  Scenario: Verify that a DELETE request to /deleteSubscription/{id} with an invalid API key returns status code 401 and
   response_message “Invalid token or token missing”.
 
     Given The api user constructs the base url with the "invalid" token.
