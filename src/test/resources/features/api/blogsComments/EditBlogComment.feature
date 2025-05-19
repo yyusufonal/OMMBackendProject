@@ -14,7 +14,7 @@ Feature: As a provider, I want to be able to update blog comment information wit
 
     Examples:
     | id  |
-    | 41  |
+    | 52  |
 
 
   Scenario Outline: Verify that a PATCH request to /api/editBlogComment/{id} with valid authorization, correct id, and correct data (only name) returns status code 200 and response_message “Blog Comment Updated successfully”
@@ -28,7 +28,7 @@ Feature: As a provider, I want to be able to update blog comment information wit
 
     Examples:
       | id  |
-      | 41  |
+      | 52  |
 
   Scenario Outline: Verify that a PATCH request to /api/editBlogComment/{id} with valid authorization, correct id, and no data returns status code 203 and response_message “No data for updated.”
 
@@ -41,7 +41,7 @@ Feature: As a provider, I want to be able to update blog comment information wit
 
     Examples:
       | id  |
-      | 41  |
+      | 52  |
 
   Scenario: Verify that a PATCH request to /api/editBlogComment without id and with valid authorization and correct data returns status code 203 and response_message “Id missing”
 
@@ -74,7 +74,7 @@ Feature: As a provider, I want to be able to update blog comment information wit
 
     Examples:
       | id  |
-      | 41  |
+      | 52  |
 
   Scenario Outline: Verify that the updated_blog_comment_id in the response body matches the id path parameter used in the PATCH request to /api/editBlogComment/{id}
 
@@ -86,7 +86,7 @@ Feature: As a provider, I want to be able to update blog comment information wit
 
     Examples:
       | id  |
-      | 41  |
+      | 52  |
 
   Scenario Outline: Verify that the updated blog comment is successfully modified via API by sending a
   GET request to /api/blogComment/{id} using the updated_blog_comment_id returned in the PATCH response.
