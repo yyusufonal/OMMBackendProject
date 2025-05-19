@@ -16,7 +16,7 @@ Feature: As a provider, I want to be able to update the information of the subsc
   Scenario: Scenario: Verify that a PATCH request to /api/editSubscription/{id} with valid authorization and no data returns status code 203 and correct error message
 
     Given The api user constructs the base url with the "provider" token.
-    Then The api user sets "api/editBlog/40" path parameters.
+    Then The api user sets "api/editSubscription/40" path parameters.
     And The api user prepares a patch request that does not contain any data to send to the api editsubscription endpoint.
     Then The api user sends a PATCH request and saves the returned response.
     And The api user verifies that the status code is 203.
