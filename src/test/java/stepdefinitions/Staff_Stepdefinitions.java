@@ -38,8 +38,8 @@ public class Staff_Stepdefinitions {
         Assert.assertEquals(status, jsonPath.getString("data.staff_list[" + dataIndex + "].status"));
     }
 
-    @And("The api user prepares a post request body to send to the api addBlog endpoint")
-    public void the_api_user_prepares_a_post_request_body_to_send_to_the_api_addBlog_endpoint() {
+    @And("The api user prepares a post request body to send to the api addStaff endpoint")
+    public void the_api_user_prepares_a_post_request_body_to_send_to_the_api_addStaff_endpoint() {
 
 
 
@@ -70,8 +70,8 @@ public class Staff_Stepdefinitions {
     }
 
 
-    @And("The api user prepares an invalid post request body to send to the api addBlog endpoint")
-    public void the_api_user_prepares_an_invalid_post_request_body_to_send_to_the_api_addBlog_endpoint() {
+    @And("The api user prepares an invalid post request body to send to the api addStaff endpoint")
+    public void the_api_user_prepares_an_invalid_post_request_body_to_send_to_the_api_addStaff_endpoint() {
 
 
 
@@ -87,7 +87,7 @@ public class Staff_Stepdefinitions {
     }
 
     @And("The api user prepares a post request body to send to the api addBlog endpointt")
-    public void the_api_user_prepares_a_post_request_body_to_send_to_the_api_addBlog_endpointt() {
+    public void the_api_user_prepares_a_post_request_body_to_send_to_the_api_addStaff_endpointt() {
 
 
 
