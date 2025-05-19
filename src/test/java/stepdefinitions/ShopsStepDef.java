@@ -9,14 +9,18 @@ import org.checkerframework.checker.units.qual.C;
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.openqa.selenium.json.Json;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import utilities.API_Utilities.API_Methods;
 import utilities.API_Utilities.TestData;
 
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 import static stepdefinitions.API_Stepdefinitions.*;
 
 public class ShopsStepDef {
+    private static final Logger log = LoggerFactory.getLogger(ShopsStepDef.class);
     JSONObject jsonObjectRequest = new JSONObject();
     int shopId;
     TestData testDataEditShop = new TestData();
@@ -202,5 +206,11 @@ public class ShopsStepDef {
     }
 
 
+    @And("The api user verifies that the email information is {string}")
+    public void theApiUserVerifiesThatTheEmailInformationIs(String value) {
 
+        response.then()
+                .assertThat()
+                .body("data.email",equalTo(value));
+    }
 }
