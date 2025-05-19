@@ -2,7 +2,7 @@ Feature:US_038 As a provider, I want to be able to create a new shop record via 
 
   Scenario: TC001 Verify that a POST request to /api/addShop with valid authorization and correct data
             (shop_title, description, contact_no, email, tax_allow, address, category, sub_category) 
-             returns status code 200 and response_message 'Shop added successfully'.(100-101-102-103 olusturulan shop idler)
+             returns status code 200 and response_message 'Shop added successfully'.
     
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/addShop" path parameters.
