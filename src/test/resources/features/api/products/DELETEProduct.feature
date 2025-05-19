@@ -17,7 +17,7 @@ Feature: API_US060 - Product deletion via API
 
     Examples:
       |id |
-      |75|
+      |77|
 
   #AC2-#AC3
   Scenario: TC002 - Delete request with missing or invalid product ID

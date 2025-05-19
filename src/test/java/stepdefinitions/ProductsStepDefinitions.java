@@ -96,7 +96,7 @@ public class ProductsStepDefinitions {
         assertEquals(shop_id, jsonPath.getString("data.shop_id"));
         assertEquals(category, jsonPath.getString( "data.category"));
         assertEquals(subcategory, jsonPath.getString("data.subcategory"));
-        assertTrue(product_name, jsonPath.getString("data.product_name").contains("Tangle-Free"));
+        assertTrue(product_name, jsonPath.getString("data.product_name").contains("New Test Product"));
         assertEquals(unit, jsonPath.getString("data.unit"));
         assertEquals(unit_name, jsonPath.getString("data.unit_name"));
         assertEquals(unit_value, jsonPath.getString("data.unit_value"));
@@ -105,8 +105,8 @@ public class ProductsStepDefinitions {
         assertEquals(prices, jsonPath.getString("data.prices"));
         assertEquals(sales_price, jsonPath.getString("data.sales_price"));
         assertEquals(product_discount, jsonPath.getString("data.product_discount"));
-        assertTrue(short_description, jsonPath.getString("data.short_description").contains("Jump Rope"));
-        assertTrue(description, jsonPath.getString("data.description").contains("This jump rope is made"));
+        assertTrue(short_description, jsonPath.getString("data.short_description").contains("Test Short Desc."));
+        assertTrue(description, jsonPath.getString("data.description").contains("Test Desc"));
         assertEquals(category_name, jsonPath.getString("data.category_name").trim());
         assertEquals(subcategory_name, jsonPath.getString("data.subcategory_name"));
         assertEquals(shop_name, jsonPath.getString("data.shop_name"));

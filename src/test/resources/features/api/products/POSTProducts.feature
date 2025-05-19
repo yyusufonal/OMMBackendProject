@@ -17,7 +17,7 @@ Feature: API_US058 - As a provider, I want to be able to create a new product re
 
     Examples:
     |id|
-    |76|
+    |89|
 
   #AC2
   Scenario: TC002 - Product creation with missing or empty data
