@@ -123,7 +123,7 @@ public class SubscriptionStepdefinitions {
 
 	}
 
-	@When("The api user prepares a patch request body to send to the api editBlog endpoint")
+	@When("The api user prepares a patch request body to send to the api editSubscription endpoint")
 	public void the_api_user_prepares_a_patch_request_body_to_send_to_the_api_edit_blog_endpoint() {
 
 		jsonObjectRequest.put("subscription_name", "Test Fee Update");
@@ -152,7 +152,7 @@ public class SubscriptionStepdefinitions {
 		Assert.assertEquals(dataKey,API_Methods.id);
 	}
 
-	@Then("The api user prepares a patch request that does not contain any data to send to the api editBlog endpoint.")
+	@Then("The api user prepares a patch request that does not contain any data to send to the api editsubscription endpoint.")
 	public void the_api_user_prepares_a_patch_request_that_does_not_contain_any_data_to_send_to_the_api_edit_blog_endpoint() {
 
 	}
