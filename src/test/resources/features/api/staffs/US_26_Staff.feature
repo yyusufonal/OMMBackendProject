@@ -1,8 +1,5 @@
 Feature: US_0026 Staff API Test
 
-  Scenario: TC001 - Get staff list with valid token
-
-
 
   Scenario: TC001 - Get staff list with invalid token
     Given The api user constructs the base url with the "provider" token.

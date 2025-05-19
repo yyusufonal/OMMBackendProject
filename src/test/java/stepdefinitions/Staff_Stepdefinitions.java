@@ -84,10 +84,27 @@ public class Staff_Stepdefinitions {
 
     }
 
+    @And("The api user prepares a post request body to send to the api addBlog endpointt")
+    public void the_api_user_prepares_a_post_request_body_to_send_to_the_api_addBlog_endpointt() {
 
+
+
+        jsonObjectRequest.put("id", "Mar Edmont");
+        jsonObjectRequest.put("provider_id", "Marc Edmont");
+        jsonObjectRequest.put("first_name", "Marc Emont");
+        jsonObjectRequest.put("last_name", "Marc Emont");
+        jsonObjectRequest.put("country_code", "Marc Edmnt");
+        jsonObjectRequest.put("contact_no", 15);
+        jsonObjectRequest.put("email", "Marc Edmont");
+        jsonObjectRequest.put("password", "Marc Edmont");
+        jsonObjectRequest.put("dob", "Marc Edmont");
+        jsonObjectRequest.put("gender", "Marc Edmont");
+
+
+    }
 
 
 }
 /*
-
+id, provider_id, first_name, last_name, country_code, contact_no, email, password, dob, gender
  */
