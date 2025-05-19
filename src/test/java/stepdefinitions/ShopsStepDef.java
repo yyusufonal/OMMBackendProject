@@ -12,6 +12,7 @@ import org.openqa.selenium.json.Json;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import utilities.API_Utilities.API_Methods;
+import utilities.API_Utilities.ExcelReader;
 import utilities.API_Utilities.TestData;
 
 import static io.restassured.RestAssured.get;
@@ -94,6 +95,15 @@ public class ShopsStepDef {
                 .post(API_Methods.fullPath);
 
         response.prettyPrint();
+
+        int shopId = response.jsonPath().getInt("data.added_shop_id");
+        System.out.println("Shop ID: " + shopId);
+
+        ExcelReader.isimAltindakiDegeriGuncelle("YUSUF", shopId);
+
+
+
+
 
 
     }
@@ -212,5 +222,13 @@ public class ShopsStepDef {
         response.then()
                 .assertThat()
                 .body("data.email",equalTo(value));
+    }
+
+    @Then("The api user sets {string} path parameters for verify new shop.")
+    public void theApiUserSetsPathParametersForVerifyNewShop(String params) {
+        int shopId = ExcelReader.isimAltindakiDegeriGetir("YUSUF");
+        String pathParams = params + "/"+ shopId ;
+
+        API_Methods.pathParam(pathParams);
     }
 }
