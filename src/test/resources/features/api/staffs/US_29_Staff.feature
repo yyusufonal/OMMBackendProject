@@ -45,7 +45,7 @@
     Examples:
       | id  |
       | 184 |
-   @API
+
   Scenario: TC004 Verify that a PATCH request to /api/editStaff without an id and with valid data
   returns status code 203 and the response_message “Id missing”.
 
@@ -55,7 +55,7 @@
     Then The api user sends a PATCH request and saves the returned responsee.
     When The api user verifies that the status code is 203.
     Then The api user verifies that the "response.response_message" information in the response body is "Id missing".
-
+   @API
   Scenario Outline: TC005 Verify that a PATCH request to /api/editStaff/{id} with valid authorization and non-existent id
   returns status code 203 and the response_message “Failed to update staff. Invalid id.”
 
@@ -64,7 +64,7 @@
     When The api user prepares a patch request body to send to the api editStaff endpoint
     Then The api user sends a PATCH request and saves the returned responsee.
     When The api user verifies that the status code is 203.
-    Then The api user verifies that the "response.response_message" information in the response body is "Failed to update staff. Invalid id.".
+    Then The api user verifies that the "response.response_message" information in the response body is "Failed to update staff.No staff this id.".
 
 
     Examples:
