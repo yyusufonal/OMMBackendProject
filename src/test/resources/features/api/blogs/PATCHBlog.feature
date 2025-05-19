@@ -7,7 +7,7 @@ Feature: As a provider, I want to be able to update the information of the blog 
     Given  The api user constructs the base url with the "provider" token.
     And The api user sets "api/editBlog/91" path parameters.
     And The api user prepares a patch request body to send to the api editBlog endpoint
-    When The api user sends a PATCH request and saves the returned response.
+    When The api user sends a PATCH request and saves the returned response to Blog.
     Then The api user verifies that the status code is 200.
     And The api user verifies that the "response.response_message" information in the response body is "Blog  Updated successfully".
     And The api user verifies that the "data.updated_blog_id" information in the response body is the same as the id path parameter in the endpoint.
@@ -19,7 +19,7 @@ Feature: As a provider, I want to be able to update the information of the blog 
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/editBlog/83" path parameters.
     And The api user prepares a patch request that does not contain any data to send to the api editBlog endpoint.
-    When The api user sends a PATCH request and saves the returned response.
+    When The api user sends a PATCH request and saves the returned response to Blog.
     Then The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "No data for updated.".
 
@@ -30,7 +30,7 @@ Feature: As a provider, I want to be able to update the information of the blog 
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/editBlog" path parameters.
     And The api user prepares a patch request body to send to the api editBlog endpoint
-    When The api user sends a PATCH request and saves the returned response.
+    When The api user sends a PATCH request and saves the returned response to Blog.
     Then The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "Id missing".
 
@@ -41,7 +41,7 @@ Feature: As a provider, I want to be able to update the information of the blog 
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/editBlog/8659" path parameters.
     And The api user prepares a patch request body to send to the api editBlog endpoint
-    When The api user sends a PATCH request and saves the returned response.
+    When The api user sends a PATCH request and saves the returned response to Blog.
     Then The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "No Results found for the given ID".
 

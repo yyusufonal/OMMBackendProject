@@ -82,7 +82,7 @@ public class BlogsStepdefinitions {
         System.out.println("Patch Body : " + hashMapRequest);
     }
 
-    @Given("The api user sends a PATCH request and saves the returned response.")
+    @Given("The api user sends a PATCH request and saves the returned response to Blog.")
     public void the_api_user_sends_a_patch_request_and_saves_the_returned_response() {
         response = given()
                 .spec(HooksAPI.spec)
