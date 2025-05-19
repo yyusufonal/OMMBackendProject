@@ -22,7 +22,7 @@ Feature: As a provider, I want to be able to access blog comments via the API co
 
 
     Examples:
-      | dataIndex | post_id | user_id | email             | name     | comment                             | ip_address | status | created_at           |
+      | dataIndex | post_id | user_id | email             | name     | comment                                              | ip_address | status | created_at           |
       | 0         | 2       | 4       | anthony@gmail.com | Anthony  | Please write more about this topic. | 127.1.1.1  | 1      | 2025-05-16 19:47:39  |
 
   Scenario: Verify that a GET request to the /api/blogComments endpoint with invalid API key returns 401 Unauthorized

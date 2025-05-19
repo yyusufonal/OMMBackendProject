@@ -18,7 +18,7 @@ Feature:US_036 As a provider, I want to be able to access the shops via the API 
   Scenario Outline:TC002 Verify that a GET request to /api/blogs with valid authorization returns status code 200,
   response_message “Blogs Listed Successfully”, and blog id(x) includes all expected blog fields.
 
-    Given TC001 The api user constructs the base url with the "provider" token.
+    Given The api user constructs the base url with the "provider" token.
     # Api kullanicisi "provider" token ile base urli olusturur
     Then The api user sets "api/myShops" path parameters.
     # Api kullanicisi "api/blogs" path parametrelerini olusturur

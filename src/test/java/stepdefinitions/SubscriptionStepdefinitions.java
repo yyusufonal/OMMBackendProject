@@ -123,19 +123,24 @@ public class SubscriptionStepdefinitions {
 
 	}
 
-	@When("The api user prepares a patch request body to send to the api editBlog endpoint")
+	@When("The api user prepares a patch request body to send to the api editSubscription endpoint")
 	public void the_api_user_prepares_a_patch_request_body_to_send_to_the_api_edit_blog_endpoint() {
-		hashMapRequest = testData.blogEditRequestBodySeyyid();
-		System.out.println("Patch Subscription body" + hashMapRequest);
+
+		jsonObjectRequest.put("subscription_name", "Test Fee Update");
+		jsonObjectRequest.put("fee",99);
+		jsonObjectRequest.put("duration",69);
+		jsonObjectRequest.put("fee_description", "iki tene bonty 1 tene bisket forwla");
+		System.out.println("Patch subscription body" + jsonObjectRequest);
+
 
 	}
-	@When("The api user sends a PATCH request and saves the returned response.")
-	public void the_api_user_sends_a_patch_request_and_saves_the_returned_response() {
+	@When("The api user sends a PATCH request and saves the returned response to subscriptions.")
+	public void the_api_user_sends_a_patch_request_and_saves_the_returned_response_to_subscriptions() {
 		response = given()
 				.spec(HooksAPI.spec)
 				.contentType(ContentType.JSON)
 				.when()
-				.body(hashMapRequest)
+				.body(jsonObjectRequest.toString())
 				.patch(API_Methods.fullPath);
 
 		response.prettyPrint();
@@ -143,8 +148,41 @@ public class SubscriptionStepdefinitions {
 	@When("The api user verifies that the {string} information in the response body is the same as the id path parameter in the endpoint.")
 	public void the_api_user_verifies_that_the_information_in_the_response_body_is_the_same_as_the_id_path_parameter_in_the_endpoint(String key) {
 		jsonPath = response.jsonPath();
-		String dataKey = jsonPath.getString(key);
+		int dataKey = Integer.parseInt(jsonPath.getString(key));
+		Assert.assertEquals(dataKey,API_Methods.id);
+		System.out.println("→ Response value  : " + dataKey);
+		System.out.println("→ Path parameter  : " + API_Methods.id);
 	}
+
+	@Then("The api user prepares a patch request that does not contain any data to send to the api editsubscription endpoint.")
+	public void the_api_user_prepares_a_patch_request_that_does_not_contain_any_data_to_send_to_the_api_edit_blog_endpoint() {
+
+	}
+	@Then("The api user sends a PATCH request, saves the returned response, and verifies that the status code is {string} with the reason phrase Unauthorized.")
+	public void the_api_user_sends_a_patch_request_saves_the_returned_response_and_verifies_that_the_status_code_is_with_the_reason_phrase_unauthorized(String string) {
+
+		try {
+			response = given()
+					.spec(HooksAPI.spec)
+					.contentType(ContentType.JSON)
+					.when()
+					.body(jsonObjectRequest.toString())
+					.patch(API_Methods.fullPath);
+		} catch (Exception e) {
+			exceptionMesaj= e.getMessage();
+		}
+		System.out.println("exceptionMesaj" + exceptionMesaj);
+		Assert.assertEquals(configLoader.getApiConfig("unauthorizedExceptionMessage"),exceptionMesaj);
+	}
+
+	@Then("The api user verifies that the fee_description information is {string}.")
+	public void the_api_user_verifies_that_the_fee_description_information_is(String feeDescription) {
+		response.then()
+				.assertThat()
+				.body("data[0].fee_description",equalTo(feeDescription));
+	}
+
+
 
 }
 

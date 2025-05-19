@@ -2,7 +2,7 @@ Feature:US_038 As a provider, I want to be able to create a new shop record via 
 
   Scenario: TC001 Verify that a POST request to /api/addShop with valid authorization and correct data
             (shop_title, description, contact_no, email, tax_allow, address, category, sub_category) 
-             returns status code 200 and response_message 'Shop added successfully'.(100-101-102-103 olusturulan shop idler)
+             returns status code 200 and response_message 'Shop added successfully'.
     
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/addShop" path parameters.
@@ -11,16 +11,14 @@ Feature:US_038 As a provider, I want to be able to create a new shop record via 
     Then The api user verifies that the status code is 200.
     Then The api user verifies that the "response.response_message" information in the response body is "Shop added successfully".
 
-  Scenario Outline:TC002 Verify that the newly created Shop exists by using its ID
+  Scenario:TC002 Verify that the newly created Shop exists by using its ID
 
     Given The api user constructs the base url with the "provider" token.
-    Then  The api user sets "api/shop-details/<id>" path parameters.
+    Then  The api user sets "api/shop-details" path parameters for verify new shop.
     When The api user sends a GET request and saves the returned response.
     Then The api user verifies that the status code is 200.
 
-    Examples:
-    |id |
-    |100|
+
 
 
   Scenario: TC003 Verify that a POST request to /api/addShop with valid authorization and missing data (address)

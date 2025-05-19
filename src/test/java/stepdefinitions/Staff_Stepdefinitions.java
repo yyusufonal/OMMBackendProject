@@ -38,8 +38,8 @@ public class Staff_Stepdefinitions {
         Assert.assertEquals(status, jsonPath.getString("data.staff_list[" + dataIndex + "].status"));
     }
 
-    @And("The api user prepares a post request body to send to the api addBlog endpoint")
-    public void the_api_user_prepares_a_post_request_body_to_send_to_the_api_addBlog_endpoint() {
+    @And("The api user prepares a post request body to send to the api addStaff endpoint")
+    public void the_api_user_prepares_a_post_request_body_to_send_to_the_api_addStaff_endpoint() {
 
 
 
@@ -65,11 +65,13 @@ public class Staff_Stepdefinitions {
                 .when()
                 .body(jsonObjectRequest.toString())
                 .post(API_Methods.fullPath);
+
+        response.prettyPrint();
     }
 
 
-    @And("The api user prepares an invalid post request body to send to the api addBlog endpoint")
-    public void the_api_user_prepares_an_invalid_post_request_body_to_send_to_the_api_addBlog_endpoint() {
+    @And("The api user prepares an invalid post request body to send to the api addStaff endpoint")
+    public void the_api_user_prepares_an_invalid_post_request_body_to_send_to_the_api_addStaff_endpoint() {
 
 
 
@@ -84,10 +86,61 @@ public class Staff_Stepdefinitions {
 
     }
 
+    @And("The api user prepares a post request body to send to the api addBlog endpointt")
+    public void the_api_user_prepares_a_post_request_body_to_send_to_the_api_addStaff_endpointt() {
 
+
+
+        jsonObjectRequest.put("id", "Mar Edmont");
+        jsonObjectRequest.put("provider_id", "Marc Edmont");
+        jsonObjectRequest.put("first_name", "Marc Emont");
+        jsonObjectRequest.put("last_name", "Marc Emont");
+        jsonObjectRequest.put("country_code", "Marc Edmnt");
+        jsonObjectRequest.put("contact_no", 15);
+        jsonObjectRequest.put("email", "Marc Edmont");
+        jsonObjectRequest.put("password", "Marc Edmont");
+        jsonObjectRequest.put("dob", "Marc Edmont");
+        jsonObjectRequest.put("gender", "Marc Edmont");
+
+
+    }
+
+    @When("The api user prepares a patch request body to send to the api editStaff endpoint")
+    public void theApiUserPreparesAPatchRequestBodyToSendToTheApiEditStaffEndpoint() {
+        jsonObjectRequest.put("firstname", "Updated Name");
+        jsonObjectRequest.put("mobileno", "5551234967");
+        jsonObjectRequest.put("email", "updatedstafff@gmail.com");
+        jsonObjectRequest.put("gender", "female");
+        jsonObjectRequest.put("shop_id", 10);
+        jsonObjectRequest.put("about_emp", "Updated employee info");
+
+        System.out.println("JSON BODY : ==> " + jsonObjectRequest);
+    }
+
+
+    @Then("The api user sends a PATCH request and saves the returned responsee.")
+    public void theApiUserSendsAPATCHRequestAndSavesTheReturnedResponsee() {
+        response = given()
+                .spec(HooksAPI.spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObjectRequest.toString())
+                .patch(API_Methods.fullPath);
+
+        response.prettyPrint();
+    }
+
+    @When("The api user prepares a patch request body to send to the api editStaff endpointt")
+    public void theApiUserPreparesAPatchRequestBodyToSendToTheApiEditStaffEndpointt() {
+        jsonObjectRequest.put("firstname", "Updated Name");
+        jsonObjectRequest.put("mobileno", "5551234967");
+
+
+        System.out.println("JSON BODY : ==> " + jsonObjectRequest);
+    }
 
 
 }
 /*
-
+id, provider_id, first_name, last_name, country_code, contact_no, email, password, dob, gender
  */

@@ -1,9 +1,22 @@
 package stepdefinitions;
 
 import config_Requirements.ConfigLoader;
+import hooks.HooksAPI;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
+import org.json.JSONObject;
 import org.junit.Assert;
+import pojos.AddBlogPojo;
+import utilities.API_Utilities.API_Methods;
+import utilities.API_Utilities.TestData;
+
+import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.*;
+
+import java.util.HashMap;
 import static stepdefinitions.API_Stepdefinitions.response;
 
 public class BlogsStepdefinitions {
@@ -11,7 +24,10 @@ public class BlogsStepdefinitions {
     JsonPath jsonPath;
     String  exceptionMesaj;
     ConfigLoader configLoader = new ConfigLoader();
-
+    JSONObject jsonObjectRequest = new JSONObject();
+    HashMap<String, Object> hashMapRequest = new HashMap<>();
+    TestData testData = new TestData();
+    AddBlogPojo addBlogPojoRequest;
 
     @Then("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string}, {string}, {string} and {string}.")
     public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_index_including_and(int dataIndex, String lang_id, String title, String slug, String tags, String summary) {
@@ -23,4 +39,59 @@ public class BlogsStepdefinitions {
         Assert.assertTrue(jsonPath.getString("data.blogs[" + dataIndex + "].summary").contains(summary));
 
     }
+
+    @Given("The api user validates the {string}, {string}, {string}, {string}, {string} and {string} contents of the data in the response body.")
+    public void the_api_user_validates_the_and_contents_of_the_data_in_the_response_body(String id, String lang_id, String title, String slug, String tags, String summary) {
+        response.then()
+                .assertThat()
+                .body("data[0].id", equalTo(id),
+                        "data[0].lang_id", equalTo(lang_id),
+                        "data[0].title", containsString(title),
+                        "data[0].slug", containsString(slug),
+                        "data[0].tags", equalTo(tags),
+                        "data[0].summary", containsString(summary));
+    }
+
+    @Given("The api user prepares a post request body to send to the api addBlog endpoint")
+    public void the_api_user_prepares_a_post_request_body_to_send_to_the_api_add_blog_endpoint() {
+        jsonObjectRequest.put("title", "New Blog");
+        jsonObjectRequest.put("category_id", 1);
+        jsonObjectRequest.put("summary", "Blog Summary.");
+        jsonObjectRequest.put("content", "Blog Content");
+        System.out.println("Post Body : " + jsonObjectRequest);
+    }
+
+
+    @When("The api user prepares a post request body containing missing data to send to the api addBlog endpoint.")
+    public void the_api_user_prepares_a_post_request_body_containing_missing_data_to_send_to_the_api_add_blog_endpoint() {
+
+
+        hashMapRequest.put("title", "New Blog");
+        hashMapRequest.put("category_id", 1);
+        hashMapRequest.put("summary", "Blog Summary.");
+        System.out.println("Post Body : " + hashMapRequest);
+    }
+
+    @Given("The api user prepares a post request without any data to send to the api addBlog endpoint.")
+    public void the_api_user_prepares_a_post_request_without_any_data_to_send_to_the_api_add_blog_endpoint() {
+    }
+
+    @Given("The api user prepares a patch request body to send to the api editBlog endpoint")
+    public void the_api_user_prepares_a_patch_request_body_to_send_to_the_api_edit_blog_endpoint() {
+        hashMapRequest = testData.blogEditRequestBody();
+        System.out.println("Patch Body : " + hashMapRequest);
+    }
+
+    @Given("The api user sends a PATCH request and saves the returned response to Blog.")
+    public void the_api_user_sends_a_patch_request_and_saves_the_returned_response() {
+        response = given()
+                .spec(HooksAPI.spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(hashMapRequest)
+                .patch(API_Methods.fullPath);
+
+        response.prettyPrint();
+    }
+
 }
