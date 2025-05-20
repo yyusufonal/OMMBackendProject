@@ -14,7 +14,7 @@ Feature: As a provider, I want to be able to create a new subscription record vi
     Then The api user sends a GET request and saves the returned response.
     And The api user verifies that the status code is 200.
 
-  Scenario: Verify that a POST request to /api/addBlog returns status code 203 and correct response message when data is missing
+  Scenario: Verify that a POST request to /api/addSubscription returns status code 203 and correct response message when data is missing
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/addSubscription" path parameters.
     When The api user sends a post request body containing missing data to send to the api addSubscribe endpoind

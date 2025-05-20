@@ -11,7 +11,7 @@ Feature: Delete Blog Comment
 
     Examples:
       | id |
-      | 57 |
+      | 81 |
 
 
   Scenario: Verify that a DELETE request to /api/deleteBlogComment/{id} without ID returns status code 203 and response message "Id missing"
@@ -42,7 +42,7 @@ Feature: Delete Blog Comment
 
     Examples:
       | id  |
-      | 61  |
+      | 82  |
 
 
   Scenario Outline: Verify that the deleted_blog_comment_id in the response body matches the ID in the path parameter
@@ -55,7 +55,7 @@ Feature: Delete Blog Comment
 
     Examples:
       | id |
-      | 78 |
+      | 83 |
 
   Scenario Outline: Verify that the deletion of the blog comment is confirmed via
   GET request using the deleted_blog_comment_id returned by the API
@@ -68,4 +68,4 @@ Feature: Delete Blog Comment
 
     Examples:
       | id  |
-      | 69  |
+      | 85  |

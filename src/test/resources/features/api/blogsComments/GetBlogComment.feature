@@ -11,7 +11,7 @@ Feature: As a provider, I should be able to access the detailed information of t
 
     Examples:
       | id | data_id | post_id | user_id | email              | name     | comment                                                  | ip_address | status | created_at          |
-      | 24 | 24      | 2       | 4       | anthony@gmail.com  | Anthony  | Please write more about this topic. Updated comment.     | 127.1.1.1  | 1      | 2025-05-16 19:47:39 |
+      | 34 | 34      | 2       | 4       | anthony@gmail.com  | Anthony  | Please write more about this topic.     | 127.1.1.1  | 1      | 2025-05-16 20:46:42 |
 
   Scenario: Verify that a GET request to /api/blogComment/{id} without id returns status code 203 and response_message “Id missing”
 

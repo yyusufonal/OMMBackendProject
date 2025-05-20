@@ -14,7 +14,7 @@ Feature: API_US059 - Product update and verification through API
 
     Examples:
       |id |
-      |55|
+      |89|
 
     #AC2
     Scenario Outline: TC002 - Update request with missing data
@@ -27,7 +27,7 @@ Feature: API_US059 - Product update and verification through API
 
       Examples:
         |id |
-        |55|
+        |89 |
 
   #AC3-#AC4
   Scenario Outline: TC003 - Update request with missing data

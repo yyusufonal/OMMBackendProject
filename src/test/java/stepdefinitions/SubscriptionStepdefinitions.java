@@ -134,8 +134,8 @@ public class SubscriptionStepdefinitions {
 
 
 	}
-	@When("The api user sends a PATCH request and saves the returned response.")
-	public void the_api_user_sends_a_patch_request_and_saves_the_returned_response() {
+	@When("The api user sends a PATCH request and saves the returned response to subscriptions.")
+	public void the_api_user_sends_a_patch_request_and_saves_the_returned_response_to_subscriptions() {
 		response = given()
 				.spec(HooksAPI.spec)
 				.contentType(ContentType.JSON)

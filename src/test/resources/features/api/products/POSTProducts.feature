@@ -17,7 +17,7 @@ Feature: API_US058 - As a provider, I want to be able to create a new product re
 
     Examples:
     |id|
-    |76|
+    |89|
 
   #AC2
   Scenario: TC002 - Product creation with missing or empty data
@@ -40,6 +40,6 @@ Feature: API_US058 - As a provider, I want to be able to create a new product re
     Given The api user constructs the base url with the "invalid" token.
     Then The api user sets "api/addProduct" path parameters.
     When The api user prepares a post request body to send to the api addShop endpoint
-    Then The api user sends a POST request and saves the returned response
+    Then The api user sends a POST request and saves the returned responses
     When The api user verifies that the status code is 401.
     And The api user verifies that the "response.response_message" information in the response body is "Invalid token or token missing".
