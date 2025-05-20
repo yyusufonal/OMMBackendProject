@@ -21,13 +21,12 @@ import static org.hamcrest.Matchers.equalTo;
 import static stepdefinitions.API_Stepdefinitions.*;
 
 public class ShopsStepDef {
-    private static final Logger log = LoggerFactory.getLogger(ShopsStepDef.class);
     JSONObject jsonObjectRequest = new JSONObject();
     int shopId;
     TestData testDataEditShop = new TestData();
 
     @When("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string}, {string}, {string} and {string},{string},{string},{string},{string},{string},{string},{string}.")
-    public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_index_including_and(Integer dataIndex, String shop_code, String shop_name , String country_code, String tax_allow, String tax_number, String contact_no, String email, String address, String country_name, String state_name, String city_name, String postal_code) {
+    public void the_api_user_verifies_the_information_in_the_response_body_for_the_entry_with_the_specified_index_including_and(Integer dataIndex, String shop_code, String shop_name, String country_code, String tax_allow, String tax_number, String contact_no, String email, String address, String country_name, String state_name, String city_name, String postal_code) {
         jsonPath = response.jsonPath();
         Assert.assertEquals(shop_code,jsonPath.getString("data.shop_list[" +dataIndex+ "].shop_code"));
         Assert.assertEquals(shop_name,jsonPath.getString("data.shop_list[" +dataIndex+ "].shop_name"));
@@ -41,7 +40,6 @@ public class ShopsStepDef {
         Assert.assertEquals(city_name,jsonPath.getString("data.shop_list[" +dataIndex+ "].city_name"));
         Assert.assertEquals(postal_code,jsonPath.getString("data.shop_list[" +dataIndex+ "].postal_code"));
         Assert.assertEquals(state_name,jsonPath.getString("data.shop_list[" +dataIndex+ "].state_name"));
-
 
 
     }
@@ -80,14 +78,12 @@ public class ShopsStepDef {
         System.out.println("POST BODY :" + jsonObjectRequest);
 
 
-
-
-
     }
-    @Then("The api user sends a POST request and saves the returned response")
-    public void the_api_user_sends_a_post_request_and_saves_the_returned_response() {
 
-        response= given()
+    @Then("The api user sends a POST request and saves the returned response and save shop id.")
+    public void the_api_user_sends_a_post_request_and_saves_the_returned_response_and_save_shop_id() {
+
+        response = given()
                 .spec(HooksAPI.spec)
                 .contentType(ContentType.JSON)
                 .when()
@@ -100,10 +96,6 @@ public class ShopsStepDef {
         System.out.println("Shop ID: " + shopId);
 
         ExcelReader.isimAltindakiDegeriGuncelle("YUSUF", shopId);
-
-
-
-
 
 
     }
@@ -127,21 +119,23 @@ public class ShopsStepDef {
     @When("The api user prepares a post request without any data to send to the api addShop endpoint.")
     public void theApiUserPreparesAPostRequestWithoutAnyDataToSendToTheApiAddShopEndpoint() {
 
+        jsonObjectRequest = new JSONObject();
+
     }
 
     @When("The api user prepares a patch request body to send to the api editShop endpoint")
     public void theApiUserPreparesAPatchRequestBodyToSendToTheApiEditShopEndpoint() {
 
-        jsonObjectRequest.put("shop_title","New Shop Updated");
-        jsonObjectRequest.put("description","New Shop Desc");
-        jsonObjectRequest.put("contact_no","12365478985");
-        jsonObjectRequest.put("email","newshop@gmail.com");
-        jsonObjectRequest.put("tax_allow",1);
-        jsonObjectRequest.put("address","New York City,USA");
-        jsonObjectRequest.put("category",1);
-        jsonObjectRequest.put("sub_category",5);
+        jsonObjectRequest.put("shop_title", "New Shop Updated");
+        jsonObjectRequest.put("description", "New Shop Desc");
+        jsonObjectRequest.put("contact_no", "12365478985");
+        jsonObjectRequest.put("email", "newshop@gmail.com");
+        jsonObjectRequest.put("tax_allow", 1);
+        jsonObjectRequest.put("address", "New York City,USA");
+        jsonObjectRequest.put("category", 1);
+        jsonObjectRequest.put("sub_category", 5);
 
-        System.out.println("JSON BODY : ==>" +  jsonObjectRequest);
+        System.out.println("JSON BODY : ==>" + jsonObjectRequest);
     }
 
     @Then("The api user sends a PATCH request and save the returned response.")
@@ -164,27 +158,16 @@ public class ShopsStepDef {
     }
 
 
-    @Then("The api user sends a PATCH request with no data and save the returned response.")
-    public void theApiUserSendsAPATCHRequestWithNoDataAndSaveTheReturnedResponse() {
-        response = given()
-                .spec(HooksAPI.spec)
-                .contentType(ContentType.JSON)
-                .when()
-                .body(jsonObjectRequest.toString())
-                .patch(API_Methods.fullPath);
-
-        response.prettyPrint();
-
-    }
 
     @When("The api user prepares a patch request body with no data to sends to the api editShop endpoint")
     public void theApiUserPreparesAPatchRequestBodyWithNoDataToSendsToTheApiEditShopEndpoint() {
+        jsonObjectRequest = new JSONObject();
     }
 
     @And("The api user sends a PATCH request, saves the returned response, and verifies that the status code is {int} with the reason phrase Unauthorized.")
     public void theApiUserSendsAPATCHRequestSavesTheReturnedResponseAndVerifiesThatTheStatusCodeIsWithTheReasonPhraseUnauthorized(int code) {
         try {
-            response =given()
+            response = given()
                     .spec(HooksAPI.spec)
                     .when()
                     .body(jsonObjectRequest.toString())
@@ -194,7 +177,7 @@ public class ShopsStepDef {
             exceptionMesaj = e.getMessage();
         }
         System.out.println("HATA MESAJI :" + exceptionMesaj);
-        Assert.assertEquals(configLoader.getApiConfig("unauthorizedExceptionMessage"),exceptionMesaj);
+        Assert.assertEquals(configLoader.getApiConfig("unauthorizedExceptionMessage"), exceptionMesaj);
     }
 
     @When("The api user validates including {string}, {string}, {string}, {string}, {int}, {string}, {int}, {int} contents of the data in the response body.")
@@ -203,14 +186,14 @@ public class ShopsStepDef {
         jsonPath = response.jsonPath();
 
 
-        Assert.assertEquals(description,jsonPath.getString("data.description"));
-        Assert.assertEquals(contact_no,jsonPath.getString("data.contact_no"));
-        Assert.assertEquals(email,jsonPath.getString("data.email"));
+        Assert.assertEquals(description, jsonPath.getString("data.description"));
+        Assert.assertEquals(contact_no, jsonPath.getString("data.contact_no"));
+        Assert.assertEquals(email, jsonPath.getString("data.email"));
         Assert.assertEquals(tax_allow, Integer.valueOf(jsonPath.getInt("data.tax_allow")));
         Assert.assertEquals(category, Integer.valueOf(jsonPath.getInt("data.category")));
         Assert.assertEquals(sub_category, Integer.valueOf(jsonPath.getInt("data.sub_category")));
-        Assert.assertEquals(address,jsonPath.getString("data.address"));
-        Assert.assertEquals(shop_title,jsonPath.getString("data.shop_title"));
+        Assert.assertEquals(address, jsonPath.getString("data.address"));
+        Assert.assertEquals(shop_title, jsonPath.getString("data.shop_title"));
 
 
     }
@@ -221,14 +204,27 @@ public class ShopsStepDef {
 
         response.then()
                 .assertThat()
-                .body("data.email",equalTo(value));
+                .body("data.email", equalTo(value));
     }
 
-    @Then("The api user sets {string} path parameters for verify new shop.")
-    public void theApiUserSetsPathParametersForVerifyNewShop(String params) {
-        int shopId = ExcelReader.isimAltindakiDegeriGetir("YUSUF");
-        String pathParams = params + "/"+ shopId ;
+    @Then("The api user send a POST request and saves the returned response to Shop.")
+    public void the_api_user_send_a_post_request_and_saves_the_returned_response_to_shop() {
 
+        response = given()
+                .spec(HooksAPI.spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObjectRequest.toString())
+                .post(API_Methods.fullPath);
+
+        response.prettyPrint();
+
+    }
+
+    @Then("The api user sets {string} path parameters for edit shop.")
+    public void the_api_user_sets_path_parameters_for_edit_shop(String params) {
+        int shopId = ExcelReader.isimAltindakiDegeriGetir("YUSUF");
+        String pathParams = params + "/" + shopId;
         API_Methods.pathParam(pathParams);
     }
 }

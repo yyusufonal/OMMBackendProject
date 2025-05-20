@@ -5,7 +5,7 @@ Feature: US_040 As a provider, I want to be able to delete shop information with
   parameter id.
     
     Given The api user constructs the base url with the "provider" token.
-    Then The api user sets "api/deleteShop/110" path parameters.
+    Then The api user sets "api/deleteShop" path parameters for edit shop.
     Then The api user sends a DELETE request and saves the returned response.
     When The api user verifies that the status code is 200.
     Then The api user verifies that the "response.response_message" information in the response body is "Shop deleted successfully".
@@ -44,7 +44,7 @@ Feature: US_040 As a provider, I want to be able to delete shop information with
             using the deleted_shop_id returned in the DELETE response.
 
     Given The api user constructs the base url with the "provider" token.
-    Then The api user sets "api/shop-details/110" path parameters.
+    Then The api user sets "api/shop-details" path parameters for edit shop.
     Then The api user sends a GET request and saves the returned response.
     And The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "No Details found".
