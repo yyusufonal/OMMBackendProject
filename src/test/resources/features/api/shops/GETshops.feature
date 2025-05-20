@@ -1,5 +1,5 @@
 Feature:US_036 As a provider, I want to be able to access the shops via the API connection
-
+  @API
   Scenario:TC001 Ensure that a GET request to the /api/myShops endpoint with valid authorization returns
             a 200 OK status and includes the message "Shops Listed Successfully"
 
@@ -14,7 +14,7 @@ Feature:US_036 As a provider, I want to be able to access the shops via the API 
     And The api user verifies that the "response.response_message" information in the response body is "Shops Listed Successfully".
     # Api kullanicisi response bodydeki response_message bilgisinin "Shops Listed Successfully" oldugunu dogrular
 
-
+  @API
   Scenario Outline:TC002 Verify that a GET request to /api/blogs with valid authorization returns status code 200,
   response_message “Blogs Listed Successfully”, and blog id(x) includes all expected blog fields.
 
@@ -31,7 +31,7 @@ Feature:US_036 As a provider, I want to be able to access the shops via the API 
       | dataIndex | shop_code | shop_name    | country_code| tax_allow | tax_number |contact_no|email                 |address             |country_name|state_name   |city_name|postal_code|
       | 0         | SHOP5GUZuT| Elegant Touch|             |  No       |            |2547896321|info@eleganttouch.com |9W6R+2C Boston      |USA (+1)    |Massachusetts|Boston   |96698      |
 
-
+  @API
     Scenario: TC003 Verify that a GET request to the /api/myShops endpoint with an invalid API key returns a 401 Unauthorized
               status code and the response body includes the message "Invalid token or token missing."
 
