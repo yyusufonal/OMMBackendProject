@@ -59,16 +59,17 @@ public class BlogsStepdefinitions {
         jsonObjectRequest.put("category_id", 1);
         jsonObjectRequest.put("summary", "Blog Summary.");
         jsonObjectRequest.put("content", "Blog Content");
-        System.out.println("Post Body : " + jsonObjectRequest);
+
     }
+
 
     @When("The api user sends a POST request and saves the returned response to Blog.")
     public void the_api_user_sends_a_post_request_and_saves_the_returned_response() {
         response = given()
                 .spec(HooksAPI.spec)
                 .contentType(ContentType.JSON)
+                .body(jsonObjectRequest.toString())
                 .when()
-                .body(addBlogPojoRequest)
                 .post(API_Methods.fullPath);
 
         response.prettyPrint();
@@ -77,16 +78,14 @@ public class BlogsStepdefinitions {
 
     @When("The api user prepares a post request body containing missing data to send to the api addBlog endpoint.")
     public void the_api_user_prepares_a_post_request_body_containing_missing_data_to_send_to_the_api_add_blog_endpoint() {
-
-
         hashMapRequest.put("title", "New Blog");
         hashMapRequest.put("category_id", 1);
         hashMapRequest.put("summary", "Blog Summary.");
-        System.out.println("Post Body : " + hashMapRequest);
     }
 
     @When("The api user prepares a post request without any data to send to the api addBlog endpoint.")
     public void the_api_user_prepares_a_post_request_without_any_data_to_send_to_the_api_add_blog_endpoint() {
+        // Boş body
     }
 
     @Then("The api user prepares a patch request body to send to the api editBlog endpoint")
@@ -94,6 +93,7 @@ public class BlogsStepdefinitions {
         hashMapRequest = testData.blogEditRequestBody();
         System.out.println("Patch Body : " + hashMapRequest);
     }
+
     @When("The api user sends a PATCH request and saves the returned response to Blog.")
     public void the_api_user_sends_a_patch_request_and_saves_the_returned_response() {
         response = given()
@@ -106,28 +106,31 @@ public class BlogsStepdefinitions {
         response.prettyPrint();
     }
 
-    @And("Thee api user verifies that the {string} information in the response body is the same as the id path parameter in the endpoint.")
-    public void the_api_user_verifies_that_the_information_in_the_response_body_is_the_same_as_the_id_path_parameter_in_the_endpoint(String key) {
+    @When("The api user executes a PATCH request and validates that the response status is 401 Unauthorized.")
+    public void the_api_user_executes_a_patch_request_and_validates_that_the_response_status_is_401_unauthorized() {
+        try {
+            response = given()
+                    .spec(HooksAPI.spec)
+                    .contentType(ContentType.JSON)
+                    .body(hashMapRequest)
+                    .when()
+                    .patch(API_Methods.fullPath);
+        } catch (Exception e) {
+            exceptionMesaj = e.getMessage();
+        }
+
+        System.out.println("Exception Message: " + exceptionMesaj);
+        Assert.assertEquals(configLoader.getApiConfig("unauthorizedExceptionMessage"), exceptionMesaj);
+    }
+
+
+    @And("The api user checks that the response field {string} equals the id sent in the endpoint.")
+    public void the_api_user_checks_that_the_response_field_equals_the_id_sent_in_the_endpoint(String key) {
         jsonPath = response.jsonPath();
         int dataKey = Integer.parseInt(jsonPath.getString(key));
         Assert.assertEquals(dataKey, API_Methods.id);
     }
 
-    @When("Thee api user sends a PATCH request, saves the returned response, and verifies that the status code is {string} with the reason phrase Unauthorized.")
-    public void the_api_user_sends_a_patch_request_saves_the_returned_response_and_verifies_that_the_status_code_is_with_the_reason_phrase_unauthorized(String string) {
-        try {
-            response = given()
-                    .spec(HooksAPI.spec)
-                    .contentType(ContentType.JSON)
-                    .when()
-                    .body(hashMapRequest)
-                    .patch(API_Methods.fullPath);
-        } catch (Exception e) {
-            exceptionMesaj = e.getMessage();
-        }
-        System.out.println("exceptionMesaj : " + exceptionMesaj);
-        Assert.assertEquals(configLoader.getApiConfig("unauthorizedExceptionMessage"), exceptionMesaj);
-    }
 
 
     @Then("The api user verifies that the content information is {string}")

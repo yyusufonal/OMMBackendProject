@@ -25,7 +25,7 @@ Feature: As a provider, I want to be able to delete blog information with the sp
   status code 203 and response_message “Blog not found. Invalid ID.”
 
     Given The api user constructs the base url with the "provider" token.
-    And The api user sets "api/deleteBlog/6541" path parameters.
+    And The api user sets "api/deleteBlog/6041" path parameters.
     Then The api user sends a DELETE request and saves the returned response.
     Then The api user verifies that the status code is 203.
     Then The api user verifies that the "response.response_message" information in the response body is "Blog not found. Invalid ID.".
@@ -35,7 +35,7 @@ Feature: As a provider, I want to be able to delete blog information with the sp
   Scenario: Verify that a DELETE request to /api/deleteBlog/{id} with an invalid API key returns status code 401 and response_message “Invalid token or token missing”.
 
     Given The api user constructs the base url with the "invalid" token.
-    And The api user sets "api/deleteBlog/85" path parameters.
+    And The api user sets "api/deleteBlog/80" path parameters.
     Then The api user sends a DELETE request, saves the returned response, and verifies that the status code is "401" with the reason phrase Unauthorized.
 
 
