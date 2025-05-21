@@ -24,16 +24,14 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="63cd3fc7-c840-4a81-8afb-492500a9fa1d">
-      <console name="DB_PROJE" type="STANDARD" schema="u201212290_onlinemasterqa" session="Main"><![CDATA[select *from bank_account;]]></console>
+      <console name="DB_PROJE" type="STANDARD" schema="u201212290_onlinemasterqa" session="Main"><![CDATA[select * from shop_services_list]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files>
-      <object connection-id="63cd3fc7-c840-4a81-8afb-492500a9fa1d" object-ref="consoles/DB_PROJE" />
-    </open-files>
+    <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="63cd3fc7-c840-4a81-8afb-492500a9fa1d" />
