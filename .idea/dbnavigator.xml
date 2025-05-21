@@ -24,7 +24,7 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="63cd3fc7-c840-4a81-8afb-492500a9fa1d">
-      <console name="DB_PROJE" type="STANDARD" schema="u201212290_onlinemasterqa" session="Main" />
+      <console name="DB_PROJE" type="STANDARD" schema="u201212290_onlinemasterqa" session="Main"><![CDATA[select *from bank_account;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -38,8 +38,19 @@
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="63cd3fc7-c840-4a81-8afb-492500a9fa1d" />
   </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="63cd3fc7-c840-4a81-8afb-492500a9fa1d" dataset="u201212290_onlinemasterqa.admin_commission" active-filter-id="" />
+  </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
+  </component>
+  <component name="DBNavigator.Project.MethodExecutionManager">
+    <method-browser />
+    <execution-history>
+      <group-entries value="true" />
+      <execution-inputs />
+    </execution-history>
+    <execution-variables-cache />
   </component>
   <component name="DBNavigator.Project.ObjectQuickFilterManager">
     <last-used-operator value="EQUAL" />
