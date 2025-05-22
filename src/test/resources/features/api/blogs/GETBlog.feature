@@ -13,7 +13,7 @@ Feature: As a provider, I should be able to access the detailed information of t
 
     Examples:
       | id | data_id | lang_id | title              | slug      | tags | summary     |
-      | 2  | 2       | 1       | Household Services | household |      | Maintaining |
+      | 2  | 2       | 1       | New Blog Updated   | PC90      |      | Blog Summary|
 
 
   Scenario: Verify that a GET request to /api/blog/{id} without valid authorization and id returns status code 203 and

@@ -1,7 +1,7 @@
 Feature: As a provider, I want to be able to access blog comments via the API connection
 
 
-  Scenario: Verify that a GET request to the /api/blogComments endpoint with valid authorization returns 200 OK
+  Scenario: TC001 Verify that a GET request to the /api/blogComments endpoint with valid authorization returns 200 OK
   and includes the message "Comments Listed Successfully"
 
 
@@ -12,7 +12,7 @@ Feature: As a provider, I want to be able to access blog comments via the API co
     And The api user verifies that the "response.response_message" information in the response body is "Comments Listed Successfully".
 
 
-  Scenario Outline: Verify that the blog comment fields in the response body of /api/blogComments include expected information
+  Scenario Outline: TC002 Verify that the blog comment fields in the response body of /api/blogComments include expected information
 
 
     Given The api user constructs the base url with the "provider" token.
@@ -25,7 +25,7 @@ Feature: As a provider, I want to be able to access blog comments via the API co
       | dataIndex | post_id | user_id | email             | name     | comment                                              | ip_address | status | created_at           |
       | 0         | 2       | 4       | anthony@gmail.com | Anthony  | Please write more about this topic. | 127.1.1.1  | 1      | 2025-05-16 19:47:39  |
 
-  Scenario: Verify that a GET request to the /api/blogComments endpoint with invalid API key returns 401 Unauthorized
+  Scenario: TC003 Verify that a GET request to the /api/blogComments endpoint with invalid API key returns 401 Unauthorized
   and the message "Invalid token or token missing."
 
 

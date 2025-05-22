@@ -6,7 +6,7 @@ Feature: As a provider, I want to be able to create a new blog record via API co
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addBlog" path parameters.
     When The api user prepares a post request body to send to the api addBlog endpoint
-    When The api user sends a POST request and saves the returned response.
+    When The api user sends a POST request and saves the returned response to Blog.
     Then The api user verifies that the status code is 200.
     And The api user verifies that the "response.response_message" information in the response body is "Blog added successfully".
 
@@ -17,7 +17,7 @@ Feature: As a provider, I want to be able to create a new blog record via API co
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addBlog" path parameters.
     And The api user prepares a post request body containing missing data to send to the api addBlog endpoint.
-    When The api user sends a POST request and saves the returned response.
+    When The api user sends a POST request and saves the returned response to Blog.
     Then The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "Title, summary, content and category_id is required.".
 
@@ -28,7 +28,7 @@ Feature: As a provider, I want to be able to create a new blog record via API co
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addBlog" path parameters.
     And The api user prepares a post request without any data to send to the api addBlog endpoint.
-    When The api user sends a POST request and saves the returned response.
+    When The api user sends a POST request and saves the returned response to Blog.
     Then The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "Title, summary, content and category_id is required.".
 
@@ -40,7 +40,7 @@ Feature: As a provider, I want to be able to create a new blog record via API co
     Given The api user constructs the base url with the "invalid" token.
     And The api user sets "api/addBlog" path parameters.
     And The api user prepares a post request body to send to the api addBlog endpoint
-    When The api user sends a POST request and saves the returned response.
+    When The api user sends a POST request and saves the returned response to Blog.
     Then The api user verifies that the status code is 401.
     And The api user verifies that the "response.response_message" information in the response body is "Invalid token or token missing".
 
@@ -57,4 +57,4 @@ Feature: As a provider, I want to be able to create a new blog record via API co
 
     Examples:
       | id |
-      | 89 |
+      | 90 |
