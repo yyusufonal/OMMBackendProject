@@ -16,3 +16,10 @@ Feature:US_003,US_008 and US_015 Database testing
     Then Verify that any data deleted.
     And Database closed.
 
+
+  Scenario:Verify the dates of the newest and oldest categories among category creation dates.
+
+    Given Database connection established.
+    Then  Create a statement to list categories from oldest to most recent
+    When Confirm the query yields category data
+    And Database closed.
