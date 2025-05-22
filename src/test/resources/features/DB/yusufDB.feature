@@ -8,3 +8,8 @@ Feature:US_003,US_008 and US_015 Database testing
     When Validate that 3 new records have been successfully inserted into the shop_services_list table.
     And Database closed.
 
+
+  Scenario: Delete the ones with inactive status in bank_account table. Verify that they are deleted.
+
+    Given Database connection established.
+    Then Prepare query for deleted into the bank_account table
