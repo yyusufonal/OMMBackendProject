@@ -7,6 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.hamcrest.Matchers;
 import utilities.API_Utilities.API_Methods;
+import org.junit.Assert;
 
 import static io.restassured.RestAssured.given;
 import static stepdefinitions.API_Stepdefinitions.jsonObjectRequest;
@@ -107,6 +108,18 @@ public class CouponsStepDefinitions {
 
     @When("The api user creates a list that contains fields to patch {int}, {int}, {string}")
     public void theApiUserCreatesExistingCouponWithSomeFields(int valid_days, int user_limit, String description) {
+        jsonObjectRequest.put("valid_days", valid_days);
+        jsonObjectRequest.put("user_limit", user_limit);
+        jsonObjectRequest.put("description", description);
+        System.out.println("POST BODY :" + jsonObjectRequest);
+    }
+
+    @When("The api users creates a list that contains fields to patch {int}, {string}, {int}, {string}, {int}, {int}, {string}")
+    public void theApiUsersCreatesAListThatContainsFieldsToPatch(int service_id, String coupon_name, int coupon_percentage, String start_date, int valid_days, int user_limit, String description) {
+        jsonObjectRequest.put("service_id", service_id);
+        jsonObjectRequest.put("coupon_name", coupon_name);
+        jsonObjectRequest.put("coupon_percentage", coupon_percentage);
+        jsonObjectRequest.put("start_date", start_date);
         jsonObjectRequest.put("valid_days", valid_days);
         jsonObjectRequest.put("user_limit", user_limit);
         jsonObjectRequest.put("description", description);
@@ -222,6 +235,49 @@ public class CouponsStepDefinitions {
             response.then()
                     .assertThat()
                     .body(path, Matchers.equalTo(expectedMessage));
+        }
+    }
+
+    @And("The api user verifies that the {string} information in the response body is the same as the {string} path parameter.")
+    public void theApiUserVerifiesThatTheInformationInTheResponseBodyIsTheSameAsThePathParameter(String responsePath, String pathParam) {
+        if (response != null) {
+            String responseId = response.jsonPath().getString("data.updated_coupon_id");
+            String pathParamValue = String.valueOf(API_Methods.id); // Get the coupon_id from the API_Methods class
+            Assert.assertEquals("Response ID does not match path parameter ID", pathParamValue, responseId);
+        }
+    }
+
+    @And("The api user stores the updated coupon id from response")
+    public void theApiUserStoresTheUpdatedCouponIdFromResponse() {
+        if (response != null) {
+            String updatedCouponId = response.jsonPath().getString("data.updated_coupon_id");
+            API_Methods.id = Integer.parseInt(updatedCouponId);
+            API_Methods.pathParam("api/coupon-details/" + updatedCouponId);
+            System.out.println("Updated Coupon ID: " + updatedCouponId);
+        }
+    }
+
+    @And("The api user sends a GET request to verify the updated coupon")
+    public void theApiUserSendsAGETRequestToVerifyTheUpdatedCoupon() {
+        response = given()
+                .spec(HooksAPI.spec)
+                .when()
+                .get(API_Methods.fullPath);
+        response.prettyPrint();
+    }
+
+    @And("The api user validates the {string}, {string}, {string}, {string}, {string}, {string}, {string} in the response body.")
+    public void theApiUserValidatesTheCouponDetailsInTheResponseBody(String service_id, String coupon_name, String coupon_percentage, String start_date, String valid_days, String user_limit, String description) {
+        if (response != null) {
+            response.then()
+                    .assertThat()
+                    .body("data.service_id", Matchers.equalTo(service_id))
+                    .body("data.coupon_name", Matchers.equalTo(coupon_name))
+                    .body("data.coupon_percentage", Matchers.equalTo(coupon_percentage))
+                    .body("data.start_date", Matchers.equalTo(start_date))
+                    .body("data.valid_days", Matchers.equalTo(valid_days))
+                    .body("data.user_limit", Matchers.equalTo(user_limit))
+                    .body("data.description", Matchers.equalTo(description));
         }
     }
 
