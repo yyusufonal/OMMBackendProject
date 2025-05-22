@@ -1,6 +1,6 @@
 Feature: As a provider, I should be able to add a blog comment via API connection with correct data and valid authorization.
 
-  Scenario: Verify that a POST request to /api/addBlogComment with valid authorization and correct data returns status code 200 and response_message “Blog Comment added successfully”
+  Scenario: TC001 Verify that a POST request to /api/addBlogComment with valid authorization and correct data returns status code 200 and response_message “Blog Comment added successfully”
 
     * The api user constructs the base url with the "provider" token.
     * The api user sets "api/addBlogComment" path parameters.
@@ -10,7 +10,7 @@ Feature: As a provider, I should be able to add a blog comment via API connectio
     * The api user verifies that the "response.response_message" information in the response body is "Blog Comment added successfully".
 
 
-  Scenario: Verify that a POST request to /api/addBlogComment with valid authorization and missing data returns status code
+  Scenario: TC002 Verify that a POST request to /api/addBlogComment with valid authorization and missing data returns status code
   203 and response_message “Post ID, email, name, and comment is required.”
 
     * The api user constructs the base url with the "provider" token.
@@ -20,7 +20,7 @@ Feature: As a provider, I should be able to add a blog comment via API connectio
     * The api user verifies that the status code is 203.
     * The api user verifies that the "response.response_message" information in the response body is "Post ID, email, name, and comment is required.".
 
-  Scenario: Verify that a POST request to /api/addBlogComment with valid authorization and no data returns status code 203 and response_message “Post ID, email, name, and comment is required.”
+  Scenario: TC003 Verify that a POST request to /api/addBlogComment with valid authorization and no data returns status code 203 and response_message “Post ID, email, name, and comment is required.”
 
     * The api user constructs the base url with the "provider" token.
     * The api user sets "api/addBlogComment" path parameters.
@@ -29,7 +29,7 @@ Feature: As a provider, I should be able to add a blog comment via API connectio
     * The api user verifies that the status code is 203.
     * The api user verifies that the "response.response_message" information in the response body is "Post ID, email, name, and comment is required.".
 
-  Scenario Outline: Verify that a POST request to /api/addBlogComment with invalid API key and correct data returns status code 401 and response_message “Invalid token or token missing”
+  Scenario Outline: TC004 Verify that a POST request to /api/addBlogComment with invalid API key and correct data returns status code 401 and response_message “Invalid token or token missing”
 
     * The api user constructs the base url with the "invalid" token.
     * The api user sets "api/addBlogComment" path parameters.
@@ -42,7 +42,7 @@ Feature: As a provider, I should be able to add a blog comment via API connectio
       | post_id | name     | email             | comment                              |
       | 2       | Anthony  | anthony@gmail.com | This blog helped me a lot, thanks!   |
 
-  Scenario Outline: Verify that the newly created blog comment via /api/addBlogComment is successfully created by sending a GET request to /api/blogComment/{id} using the added_blog_comment_id returned in the POST response.
+  Scenario Outline: TC005 Verify that the newly created blog comment via /api/addBlogComment is successfully created by sending a GET request to /api/blogComment/{id} using the added_blog_comment_id returned in the POST response.
 
     * The api user constructs the base url with the "provider" token.
     * The api user sets "api/blogComment/<id>" path parameters.
@@ -51,4 +51,4 @@ Feature: As a provider, I should be able to add a blog comment via API connectio
 
     Examples:
       | id  |
-      | 24  |
+      | 31  |

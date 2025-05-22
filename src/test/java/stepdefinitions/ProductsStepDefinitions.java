@@ -1,20 +1,15 @@
 package stepdefinitions;
 
-import config_Requirements.ConfigLoader;
 import hooks.HooksAPI;
-import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import org.json.JSONObject;
 import org.junit.Assert;
 import utilities.API_Utilities.API_Methods;
 
-
-import java.util.Map;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertEquals;
@@ -22,7 +17,7 @@ import static org.junit.Assert.assertTrue;
 
 
 import static io.restassured.RestAssured.given;
-import static stepdefinitions.API_Stepdefinitions.*;
+import static stepdefinitions.BlogCategoryStepdefinitions.*;
 
 public class ProductsStepDefinitions {
 

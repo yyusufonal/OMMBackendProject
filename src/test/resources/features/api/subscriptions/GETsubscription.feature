@@ -1,6 +1,6 @@
 Feature:  As a provider, I want to be able to access subscriptions via API connection.
 
-
+  @API
   Scenario Outline: Verify that the GET /api/subscriptions endpoint returns status code 200, correct response message, and all required subscription fields.
 
     Given The api user constructs the base url with the "provider" token.
@@ -21,7 +21,7 @@ Feature:  As a provider, I want to be able to access subscriptions via API conne
     |0          | Premium           |99.99 |USD            | 12      |Annual Subscription | Only one shop        |1                  |1       |1     |
 
 
-
+  @API
   Scenario: Verify that GET /api/subscriptions returns 401 status and correct error message with invalid authorization.
 
     Given The api user constructs the base url with the "invalid" token.
