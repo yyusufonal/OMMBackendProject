@@ -54,12 +54,12 @@ public class ProductsStepDefinitions {
         response.prettyPrint();
     }
 
-    @Given("The api user verifies that the {string} information in the response body is {string}, {string}, {string}, {string}, {string} and {string},{string},{string},{string},{string},{string},{string}.")
+   /* @Given("The api user verifies that the {string} information in the response body is {string}, {string}, {string}, {string}, {string} and {string},{string},{string},{string},{string},{string},{string}.")
     public void the_api_user_verifies_that_the_information_in_the_response_body_is_and(String id, String string2, String string3, String string4, String string5, String string6, String string7, String string8, String string9, String string10, String string11, String string12, String string13) {
         jsonPath = response.jsonPath();
         jsonPath.prettyPrint();
         System.out.println(jsonObjectId);
-    }
+    }*/
 
 
     @When("the user sends a GET request to {string} without a shop_id")
@@ -247,4 +247,24 @@ public class ProductsStepDefinitions {
                 .assertThat()
                 .body(key,equalTo(value));
     }
+
+    @Given("The api user validates the {int} index, including  {string}, {string}, {string}, {string}, {string} and {string}, {string}, {string}, {string}, {string}, {string}, {string} contents of the data in the response body.")
+    public void the_api_user_validates_the_index_including_and_contents_of_the_data_in_the_response_body(Integer dataIndex, String id, String product_name, String currency, String currency_code, String product_currency, String product_price, String sale_price, String product_discount, String short_description, String category_name, String subcategory_name, String product_image) {
+        jsonPath = response.jsonPath();
+
+        assertEquals(id, jsonPath.getString( "data.product_list[1].id"));
+        assertEquals(currency, jsonPath.getString("data.product_list[1].currency"));
+        assertEquals(currency_code, jsonPath.getString("data.product_list[1].currency_code"));
+        assertEquals(product_currency, jsonPath.getString( "data.product_list[1].product_currency"));
+        assertEquals(product_price, jsonPath.getString("data.product_list[1].product_price"));
+        assertTrue(product_name, jsonPath.getString("data.product_list[1].product_name").contains("5 in 1 Hair Dryer Brush"));
+        assertEquals(sale_price, jsonPath.getString("data.product_list[1].sale_price"));
+        assertEquals(product_discount, jsonPath.getString("data.product_list[1].product_discount"));
+        assertEquals(short_description, jsonPath.getString("data.product_list[1].short_description").trim());
+        assertEquals(category_name, jsonPath.getString("data.product_list[1].category_name"));
+        assertEquals(subcategory_name, jsonPath.getString("data.product_list[1].subcategory_name").trim());
+        assertEquals(product_image, jsonPath.getString("data.product_list[1].product_image"));
+    }
+
+
 }
