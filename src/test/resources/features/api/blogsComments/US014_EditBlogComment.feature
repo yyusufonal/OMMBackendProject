@@ -1,6 +1,6 @@
 Feature: As a provider, I want to be able to update blog comment information with the specified id number via API connection
 
-  Scenario Outline: Verify that a PATCH request to /api/editBlogComment/{id} with valid authorization and correct data
+  Scenario Outline: TC001 Verify that a PATCH request to /api/editBlogComment/{id} with valid authorization and correct data
   (name, email, comment) returns status code 200, response_message “Blog Comment Updated successfully”, and that updated_comment_id in
   the response matches the path parameter id.
 
@@ -17,7 +17,7 @@ Feature: As a provider, I want to be able to update blog comment information wit
     | 52  |
 
 
-  Scenario Outline: Verify that a PATCH request to /api/editBlogComment/{id} with valid authorization, correct id, and correct data (only name) returns status code 200 and response_message “Blog Comment Updated successfully”
+  Scenario Outline: TC002 Verify that a PATCH request to /api/editBlogComment/{id} with valid authorization, correct id, and correct data (only name) returns status code 200 and response_message “Blog Comment Updated successfully”
 
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/editBlogComment/<id>" path parameters.
@@ -30,7 +30,7 @@ Feature: As a provider, I want to be able to update blog comment information wit
       | id  |
       | 52  |
 
-  Scenario Outline: Verify that a PATCH request to /api/editBlogComment/{id} with valid authorization, correct id, and no data returns status code 203 and response_message “No data for updated.”
+  Scenario Outline: TC003 Verify that a PATCH request to /api/editBlogComment/{id} with valid authorization, correct id, and no data returns status code 203 and response_message “No data for updated.”
 
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/editBlogComment/<id>" path parameters.
@@ -43,7 +43,7 @@ Feature: As a provider, I want to be able to update blog comment information wit
       | id  |
       | 52  |
 
-  Scenario: Verify that a PATCH request to /api/editBlogComment without id and with valid authorization and correct data returns status code 203 and response_message “Id missing”
+  Scenario: TC004 Verify that a PATCH request to /api/editBlogComment without id and with valid authorization and correct data returns status code 203 and response_message “Id missing”
 
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/editBlogComment" path parameters.
@@ -52,7 +52,7 @@ Feature: As a provider, I want to be able to update blog comment information wit
     Then The api user verifies that the status code is 203.
     Then The api user verifies that the "response.response_message" information in the response body is "Id missing".
 
-  Scenario Outline: Verify that a PATCH request to /api/editBlogComment/{id} with valid authorization, non-existent id, and correct data returns status code 203 and response_message “No Results found for the given ID”
+  Scenario Outline: TC005 Verify that a PATCH request to /api/editBlogComment/{id} with valid authorization, non-existent id, and correct data returns status code 203 and response_message “No Results found for the given ID”
 
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/editBlogComment/<id>" path parameters.
@@ -65,7 +65,7 @@ Feature: As a provider, I want to be able to update blog comment information wit
       | id   |
       | 9999 |
 
-  Scenario Outline: Verify that a PATCH request to /api/editBlogComment/{id} with invalid token and valid data returns status code 401 and correct error message
+  Scenario Outline: TC006 Verify that a PATCH request to /api/editBlogComment/{id} with invalid token and valid data returns status code 401 and correct error message
 
     Given The api user constructs the base url with the "invalid" token.
     Then The api user sets "api/editBlogComment/<id>" path parameters.
@@ -76,7 +76,7 @@ Feature: As a provider, I want to be able to update blog comment information wit
       | id  |
       | 52  |
 
-  Scenario Outline: Verify that the updated_blog_comment_id in the response body matches the id path parameter used in the PATCH request to /api/editBlogComment/{id}
+  Scenario Outline: TC007 Verify that the updated_blog_comment_id in the response body matches the id path parameter used in the PATCH request to /api/editBlogComment/{id}
 
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/editBlogComment/<id>" path parameters.
@@ -88,7 +88,7 @@ Feature: As a provider, I want to be able to update blog comment information wit
       | id  |
       | 52  |
 
-  Scenario Outline: Verify that the updated blog comment is successfully modified via API by sending a
+  Scenario Outline: TC008 Verify that the updated blog comment is successfully modified via API by sending a
   GET request to /api/blogComment/{id} using the updated_blog_comment_id returned in the PATCH response.
 
     Given The api user constructs the base url with the "provider" token.
