@@ -5,12 +5,8 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.http.ContentType;
-import org.checkerframework.checker.units.qual.C;
 import org.json.JSONObject;
 import org.junit.Assert;
-import org.openqa.selenium.json.Json;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import utilities.API_Utilities.API_Methods;
 import utilities.API_Utilities.ExcelReader;
 import utilities.API_Utilities.TestData;
@@ -18,6 +14,7 @@ import utilities.API_Utilities.TestData;
 import static io.restassured.RestAssured.get;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static stepdefinitions.API_Stepdefinitions.jsonObjectRequest;
 import static stepdefinitions.API_Stepdefinitions.*;
 
 public class ShopsStepDef {

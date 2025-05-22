@@ -5,15 +5,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 import org.json.JSONObject;
 import org.junit.Assert;
 import utilities.API_Utilities.API_Methods;
 
 import static io.restassured.RestAssured.given;
-import static stepdefinitions.API_Stepdefinitions.jsonPath;
-import static stepdefinitions.API_Stepdefinitions.response;
+import static stepdefinitions.API_Stepdefinitions.*;
+import static stepdefinitions.BlogCategoryStepdefinitions.jsonPath;
+import static stepdefinitions.BlogCategoryStepdefinitions.response;
 
 public class Staff_Stepdefinitions {
 
@@ -59,7 +58,7 @@ public class Staff_Stepdefinitions {
 
 
 
-        API_Stepdefinitions.response =given()
+        BlogCategoryStepdefinitions.response =given()
                 .spec(HooksAPI.spec)
                 .contentType(ContentType.JSON)
                 .when()

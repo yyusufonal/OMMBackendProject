@@ -27,7 +27,6 @@ public class API_Stepdefinitions {
 
     public static Response response;
     public static JsonPath jsonPath;
-   // static JsonPath jsonPath;
     public static String  exceptionMesaj;
     public static ConfigLoader configLoader = new ConfigLoader();
     public static JSONObject jsonObjectRequest = new JSONObject();
