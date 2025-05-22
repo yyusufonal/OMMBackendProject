@@ -75,7 +75,7 @@ public class UmmuhanDBStepdef extends Manage {
     @Then("Print the titles of matching blog posts.")
     public void print_titles_of_matching_blog_posts() {
         List<Map<String, Object>> results = JDBCMethods.getQueryResultMap(query);
-        System.out.println("=== Blog Posts with 'professional' in slug/title ===");
+        System.out.println(" Blog Posts with 'professional' in slug/title");
         for (Map<String, Object> row : results) {
             System.out.println("ID: " + row.get("id") + " | Title: " + row.get("title"));
         }
@@ -91,7 +91,7 @@ public class UmmuhanDBStepdef extends Manage {
     public void verify_returned_post_ids_are_listed() {
         List<Object> ids = JDBCMethods.getColumnData(query, "id");
         assertFalse("Son 30 gün içinde blog bulunamadı!", ids.isEmpty());
-        System.out.println("✅ Recent Blog Post IDs: " + ids);
+        System.out.println("Recent Blog Post IDs: " + ids);
     }
 
 }
