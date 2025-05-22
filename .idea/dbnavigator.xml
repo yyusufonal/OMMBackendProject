@@ -27,7 +27,19 @@
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="63cd3fc7-c840-4a81-8afb-492500a9fa1d">
-      <console name="DB_PROJE" type="STANDARD" schema="u201212290_onlinemasterqa" session="Main"><![CDATA[select *from bank_account]]></console>
+      <console name="DB_PROJE" type="STANDARD" schema="u201212290_onlinemasterqa" session="Main"><![CDATA[INSERT INTO bank_account (id, user_id, user_name, acc_no, bank_name, bank_addr, ifsc_code, pancard_no, paypal_account, paypal_email_id, status)
+VALUES
+  (100, 999, 'Inactive User 1', '000000000001', 'Fake Bank', 'Test Address 1', 'FAKE0001', 'FAKEPANCARD1', 'inactive_user1', 'inactive1@example.com', 'inactive'),
+  (101, 998, 'Inactive User 2', '000000000002', 'Fake Bank', 'Test Address 2', 'FAKE0002', 'FAKEPANCARD2', 'inactive_user2', 'inactive2@example.com', 'inactive'),
+  (102, 997, 'Inactive User 3', '000000000003', 'Fake Bank', 'Test Address 3', 'FAKE0003', 'FAKEPANCARD3', 'inactive_user3', 'inactive3@example.com', 'inactive'),
+  (103, 996, 'Inactive User 4', '000000000004', 'Fake Bank', 'Test Address 4', 'FAKE0004', 'FAKEPANCARD4', 'inactive_user4', 'inactive4@example.com', 'inactive');
+  
+  
+  select * from categories
+  
+  
+ SELECT MAX(created_at) AS newest_category, MIN(created_at) AS oldest_category
+ FROM u201212290_onlinemasterqa.categories;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">

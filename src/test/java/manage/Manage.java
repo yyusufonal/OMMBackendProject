@@ -53,8 +53,8 @@ public class Manage {
     /**
      * US_08
      */
-    private String US08deleted_data_inactive = "DELETE FROM  u201212290_onlinemasterqa.bank_account\n" +
-            "WHERE status = 'inactive';";
+    private String US08deleted_data_inactive = "DELETE FROM u201212290_onlinemasterqa.bank_account\n" +
+            "WHERE status = 'inactive' LIMIT 1;";
     /**
      * US_09
      */
