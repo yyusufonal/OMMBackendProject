@@ -2,13 +2,11 @@ package stepdefinitions;
 
 import config_Requirements.ConfigLoader;
 import hooks.HooksAPI;
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
-import org.junit.Assert;
 import org.json.JSONObject;
 import utilities.API_Utilities.API_Methods;
 import static org.hamcrest.Matchers.equalTo;
@@ -16,7 +14,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.stringContainsInOrder;
 import static org.junit.Assert.assertEquals;
-import static stepdefinitions.API_Stepdefinitions.response;
+import static stepdefinitions.BlogCategoryStepdefinitions.response;
 
 public class BlogCommentsStepDefinitions {
 

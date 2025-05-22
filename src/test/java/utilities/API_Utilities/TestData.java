@@ -1,11 +1,11 @@
 package utilities.API_Utilities;
 
-import io.cucumber.java.hu.Ha;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 
 import static stepdefinitions.API_Stepdefinitions.jsonObjectRequest;
+import static stepdefinitions.API_Stepdefinitions.*;
 
 public class TestData{
     HashMap<String, Object> requestBody;
@@ -43,9 +43,5 @@ public class TestData{
     }
 
 
-    public TestData addParameterForMap(String name, String name1) {
-    }
 
-    public JSONObject buildUsingMap() {
-    }
 }

@@ -5,15 +5,12 @@ import io.cucumber.java.en.Given;
 import io.restassured.response.Response;
 import io.restassured.path.json.JsonPath;
 import org.json.JSONObject;
-import org.junit.Assert;
 import utilities.API_Utilities.API_Methods;
 import utilities.API_Utilities.TestData;
 
-import java.util.HashMap;
-
 import static org.hamcrest.Matchers.equalTo;
 
-public class API_Stepdefinitions {
+public class BlogCategoryStepdefinitions {
 
     public static Response response;
     public static JsonPath jsonPath;
@@ -55,41 +52,5 @@ public class API_Stepdefinitions {
                 "data[0].updatedBy", equalTo(updatedBy));
     }
 
-    // Unified POST request builder
-    @Given("The api user prepares a POST request to the addBlogCategory endpoint with name {string} and optional description {string}")
-    public void prepare_post_request_for_add_blog_category(String name, String description) {
-        if (!description.equals("null")) {
-            requestBody = builder
-                    .addParameterForMap("name", name)
-                    .addParameterForMap("description", description)
-                    .buildUsingMap();
-        } else {
-            requestBody = builder
-                    .addParameterForMap("name", name)
-                    .buildUsingMap();
-        }
 
-        System.out.println("POST Request Body: " + requestBody);
-    }
-
-    // Unified PATCH request builder
-    @Given("The api user prepares a PATCH request to the editBlogCategory endpoint with name {string} and optional description {string}")
-    public void prepare_patch_request_for_edit_blog_category(String name, String description) {
-        if (!name.equals("null") && !description.equals("null")) {
-            requestBody = builder
-                    .addParameterForMap("name", name)
-                    .addParameterForMap("description", description)
-                    .buildUsingMap();
-        } else if (!name.equals("null")) {
-            requestBody = builder
-                    .addParameterForMap("name", name)
-                    .buildUsingMap();
-        } else {
-            requestBody = builder
-                    .addParameterForMap("description", description)
-                    .buildUsingMap();
-        }
-
-        System.out.println("PATCH Request Body: " + requestBody);
-    }
 }

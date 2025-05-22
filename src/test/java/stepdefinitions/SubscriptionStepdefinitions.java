@@ -2,13 +2,9 @@ package stepdefinitions;
 
 import config_Requirements.ConfigLoader;
 import hooks.HooksAPI;
-import io.cucumber.core.gherkin.messages.internal.gherkin.internal.com.eclipsesource.json.JsonObject;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 import org.json.JSONObject;
 import org.junit.Assert;
 import utilities.API_Utilities.API_Methods;
@@ -19,8 +15,9 @@ import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
-import static stepdefinitions.API_Stepdefinitions.jsonPath;
-import static stepdefinitions.API_Stepdefinitions.response;
+import static stepdefinitions.API_Stepdefinitions.*;
+import static stepdefinitions.BlogCategoryStepdefinitions.jsonPath;
+import static stepdefinitions.BlogCategoryStepdefinitions.response;
 
 public class SubscriptionStepdefinitions {
 
