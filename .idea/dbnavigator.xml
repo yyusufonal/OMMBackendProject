@@ -19,12 +19,12 @@
   <component name="DBNavigator.Project.DatabaseBrowserManager">
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
-    <show-object-properties value="true" />
+    <show-object-properties value="false" />
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
     <connection id="63cd3fc7-c840-4a81-8afb-492500a9fa1d">
-      <console name="DB_PROJE" type="STANDARD" schema="u201212290_onlinemasterqa" session="Main"><![CDATA[select * from shop_services_list]]></console>
+      <console name="DB_PROJE" type="STANDARD" schema="u201212290_onlinemasterqa" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
