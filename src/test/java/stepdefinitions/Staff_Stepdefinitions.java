@@ -11,8 +11,8 @@ import utilities.API_Utilities.API_Methods;
 
 import static io.restassured.RestAssured.given;
 import static stepdefinitions.API_Stepdefinitions.*;
-import static stepdefinitions.BlogCategoryStepdefinitions.jsonPath;
-import static stepdefinitions.BlogCategoryStepdefinitions.response;
+import static stepdefinitions.API_Stepdefinitions.jsonObjectRequest;
+
 
 public class Staff_Stepdefinitions {
 
@@ -58,7 +58,7 @@ public class Staff_Stepdefinitions {
 
 
 
-        BlogCategoryStepdefinitions.response =given()
+        response =given()
                 .spec(HooksAPI.spec)
                 .contentType(ContentType.JSON)
                 .when()
