@@ -14,7 +14,8 @@ import static org.hamcrest.Matchers.equalTo;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.stringContainsInOrder;
 import static org.junit.Assert.assertEquals;
-import static stepdefinitions.BlogCategoryStepdefinitions.response;
+import static stepdefinitions.API_Stepdefinitions.jsonObjectRequest;
+import static stepdefinitions.API_Stepdefinitions.*;
 
 public class BlogCommentsStepDefinitions {
 

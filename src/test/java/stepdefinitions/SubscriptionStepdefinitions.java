@@ -16,8 +16,8 @@ import java.util.HashMap;
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 import static stepdefinitions.API_Stepdefinitions.*;
-import static stepdefinitions.BlogCategoryStepdefinitions.jsonPath;
-import static stepdefinitions.BlogCategoryStepdefinitions.response;
+import static stepdefinitions.API_Stepdefinitions.jsonObjectRequest;
+import static stepdefinitions.API_Stepdefinitions.*;
 
 public class SubscriptionStepdefinitions {
 

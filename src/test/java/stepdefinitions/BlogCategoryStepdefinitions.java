@@ -17,12 +17,7 @@ import static stepdefinitions.API_Stepdefinitions.response;
 
 public class BlogCategoryStepdefinitions {
 
-    public static Response response;
-    public static JsonPath jsonPath;
-    public static String exceptionMesaj;
-    public static ConfigLoader configLoader = new ConfigLoader();
-    public static JSONObject requestBody;
-    public static TestData builder = new TestData(); // Assuming you have a TestData builder class
+
 
     @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
     public void verify_response_data_by_index(int dataindex, String lang_id, String name, String slug, String description, String keywords, String category_order, String status, String createdAt, String createdBy, String updatedAt, String updatedBy) {

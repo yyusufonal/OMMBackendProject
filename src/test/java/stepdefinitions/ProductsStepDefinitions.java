@@ -17,7 +17,9 @@ import static org.junit.Assert.assertTrue;
 
 
 import static io.restassured.RestAssured.given;
-import static stepdefinitions.BlogCategoryStepdefinitions.*;
+import static stepdefinitions.API_Stepdefinitions.response;
+import static stepdefinitions.API_Stepdefinitions.jsonObjectRequest;
+import static stepdefinitions.API_Stepdefinitions.*;
 
 public class ProductsStepDefinitions {
 
