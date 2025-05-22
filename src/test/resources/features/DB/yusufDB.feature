@@ -12,4 +12,7 @@ Feature:US_003,US_008 and US_015 Database testing
   Scenario: Delete the ones with inactive status in bank_account table. Verify that they are deleted.
 
     Given Database connection established.
-    Then Prepare query for deleted into the bank_account table
+    Then Prepare query for deleted into the bank_account table.
+    Then Verify that any data deleted.
+    And Database closed.
+
