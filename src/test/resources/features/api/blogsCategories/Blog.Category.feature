@@ -5,6 +5,7 @@ Feature: As a provider, I should be able to access the detailed information of t
   body contains the correct category details, including id, lang_id, name, slug, description, keywords, category_order, status,
   createdAt, createdBy, updatedAt, updatedBy
 
+    Given The api user constructs the base url with the "provider" token.
     * The api user sets "api/blogCategory/<id>" path parameters.
     * The api user sends a "GET" request and saves the returned response.
     * The api user verifies that the status code is 200.
@@ -19,6 +20,7 @@ Feature: As a provider, I should be able to access the detailed information of t
   Scenario: Verify that when a GET request is sent to the /api/blogCategory/{id} endpoint with valid authorization but without an ID,
   the response returns a status code of 203 and the response_message is 'Id missing'
 
+    Given The api user constructs the base url with the "provider" token.
     * The api user sets "api/blogCategory" path parameters.
     * The api user sends a "GET" request and saves the returned response.
     * The api user verifies that the status code is 203.
@@ -28,6 +30,7 @@ Feature: As a provider, I should be able to access the detailed information of t
   Scenario Outline: Verify that when a GET request is sent to the /api/blogCategory/{id} endpoint with valid authorization and a
   non-existent ID, the response returns a status code of 203 and the response_message is 'No Details for this id.'
 
+    Given The api user constructs the base url with the "provider" token.
     * The api user sets "api/blogCategory/<id>" path parameters.
     * The api user sends a "GET" request and saves the returned response.
     * The api user verifies that the status code is 203.
@@ -41,6 +44,7 @@ Feature: As a provider, I should be able to access the detailed information of t
   Scenario Outline: Invalid Token Verify that when a GET request is sent to the /api/blogCategory/{id} endpoint with an invalid API key,
   the response returns a status code of 401 and the response_message is 'Invalid token or token missing'
 
+    Given The api user constructs the base url with the "provider" token.
     * The api user sets "api/blogCategory/<id>" path parameters.
     * The api user sends a "GET" request, saves the returned response, and verifies that the status code is '401' with the reason phrase Unauthorized.
 
