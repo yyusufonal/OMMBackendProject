@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.equalTo;
 
 public class API_Methods {
     public static String fullPath;
-    static Response response;
+    public static Response response;
     public static int id;
 
     public static void pathParam(String rawPaths) {  //    api/blogs

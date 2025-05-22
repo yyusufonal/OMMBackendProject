@@ -43,6 +43,9 @@ public class TestData{
     }
 
 
+    public TestData addParameterForMap(String name, String name1) {
+    }
 
-
+    public JSONObject buildUsingMap() {
+    }
 }

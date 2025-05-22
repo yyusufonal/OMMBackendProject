@@ -1,119 +1,95 @@
 package stepdefinitions;
 
-import io.cucumber.java.en.*;
-import io.restassured.RestAssured;
+import config_Requirements.ConfigLoader;
+import io.cucumber.java.en.Given;
 import io.restassured.response.Response;
+import io.restassured.path.json.JsonPath;
+import org.json.JSONObject;
+import org.junit.Assert;
+import utilities.API_Utilities.API_Methods;
+import utilities.API_Utilities.TestData;
 
-import java.util.Map;
+import java.util.HashMap;
 
-import static io.restassured.RestAssured.*;
-import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.hamcrest.Matchers.equalTo;
 
-public class BlogCategorySteps {
+public class API_Stepdefinitions {
 
-    private Response response;
-    private String baseUrl = "https://qa.onlinemastermarket.com/api";
-    private String validToken = "SZk44qHV59wMIlUGa256";
-    private String invalidToken = "SZk44qHV59wMIlUGa257";
-    private String endpoint;
-    private Map<String, String> requestBody;
+    public static Response response;
+    public static JsonPath jsonPath;
+    public static String exceptionMesaj;
+    public static ConfigLoader configLoader = new ConfigLoader();
+    public static JSONObject requestBody;
+    public static TestData builder = new TestData(); // Assuming you have a TestData builder class
 
-    // ------------------ US06: Add Blog Category ------------------ //
-
-    @Given("The API base URL is set")
-    public void the_api_base_url_is_set() {
-        RestAssured.baseURI = baseUrl;
+    @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void verify_response_data_by_index(int dataindex, String lang_id, String name, String slug, String description, String keywords, String category_order, String status, String createdAt, String createdBy, String updatedAt, String updatedBy) {
+        API_Methods.response.then().assertThat().body(
+                "data.blogs[" + dataindex + "].lang_id", equalTo(lang_id),
+                "data.blogs[" + dataindex + "].name", equalTo(name),
+                "data.blogs[" + dataindex + "].slug", equalTo(slug),
+                "data.blogs[" + dataindex + "].description", equalTo(description),
+                "data.blogs[" + dataindex + "].keywords", equalTo(keywords),
+                "data.blogs[" + dataindex + "].category_order", equalTo(category_order),
+                "data.blogs[" + dataindex + "].status", equalTo(status),
+                "data.blogs[" + dataindex + "].createdAt", equalTo(createdAt),
+                "data.blogs[" + dataindex + "].createdBy", equalTo(createdBy),
+                "data.blogs[" + dataindex + "].updatedAt", equalTo(updatedAt),
+                "data.blogs[" + dataindex + "].updatedBy", equalTo(updatedBy));
     }
 
-    @And("I set the \"Authorization\" header to \"API Key {string}\"")
-    public void i_set_the_authorization_header(String apiKey) {
-        this.validToken = apiKey;  // Update token for dynamic use
+    @Given("The api user verifies that the data in the response body includes {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
+    public void verify_blog_category_data(String id, String lang_id, String name, String slug, String description, String keywords, String category_order, String status, String createdAt, String createdBy, String updatedAt, String updatedBy) {
+        API_Methods.response.then().assertThat().body(
+                "data[0].id", equalTo(id),
+                "data[0].lang_id", equalTo(lang_id),
+                "data[0].name", equalTo(name),
+                "data[0].slug", equalTo(slug),
+                "data[0].description", equalTo(description),
+                "data[0].keywords", equalTo(keywords),
+                "data[0].category_order", equalTo(category_order),
+                "data[0].status", equalTo(status),
+                "data[0].createdAt", equalTo(createdAt),
+                "data[0].createdBy", equalTo(createdBy),
+                "data[0].updatedAt", equalTo(updatedAt),
+                "data[0].updatedBy", equalTo(updatedBy));
     }
 
-    @Given("I have a new blog category with:")
-    public void i_have_a_new_blog_category_with(io.cucumber.datatable.DataTable dataTable) {
-        requestBody = dataTable.asMaps().get(0);
+    // Unified POST request builder
+    @Given("The api user prepares a POST request to the addBlogCategory endpoint with name {string} and optional description {string}")
+    public void prepare_post_request_for_add_blog_category(String name, String description) {
+        if (!description.equals("null")) {
+            requestBody = builder
+                    .addParameterForMap("name", name)
+                    .addParameterForMap("description", description)
+                    .buildUsingMap();
+        } else {
+            requestBody = builder
+                    .addParameterForMap("name", name)
+                    .buildUsingMap();
+        }
+
+        System.out.println("POST Request Body: " + requestBody);
     }
 
-    @When("I send a POST request to {string} with the blog category data")
-    public void i_send_a_post_request_to_with_the_blog_category_data(String path) {
-        response = given()
-                .header("Authorization", validToken)
-                .header("Content-Type", "application/json")
-                .body(requestBody)
-                .when()
-                .post(baseUrl + path);
-    }
+    // Unified PATCH request builder
+    @Given("The api user prepares a PATCH request to the editBlogCategory endpoint with name {string} and optional description {string}")
+    public void prepare_patch_request_for_edit_blog_category(String name, String description) {
+        if (!name.equals("null") && !description.equals("null")) {
+            requestBody = builder
+                    .addParameterForMap("name", name)
+                    .addParameterForMap("description", description)
+                    .buildUsingMap();
+        } else if (!name.equals("null")) {
+            requestBody = builder
+                    .addParameterForMap("name", name)
+                    .buildUsingMap();
+        } else {
+            requestBody = builder
+                    .addParameterForMap("description", description)
+                    .buildUsingMap();
+        }
 
-    @Then("the response status code should be {int}")
-    public void the_response_status_code_should_be(Integer expectedStatusCode) {
-        assertEquals(expectedStatusCode.intValue(), response.getStatusCode());
-    }
-
-    @And("the response message should be {string}")
-    public void the_response_message_should_be(String expectedMessage) {
-        String actualMessage = response.jsonPath().getString("response.response_message");
-        assertEquals(expectedMessage, actualMessage);
-    }
-
-    @And("the response should contain {string}")
-    public void the_response_should_contain(String key) {
-        assertNotNull(response.jsonPath().get(key));
-    }
-
-    // ------------------ US07: Get Blog Category Details ------------------ //
-
-    @Given("the endpoint is set to blogCategory with id {int}")
-    public void setEndpointWithId(int id) {
-        endpoint = baseUrl + "/blogCategory/" + id;
-    }
-
-    @Given("no ID is provided in the blogCategory endpoint")
-    public void setEndpointWithoutId() {
-        endpoint = baseUrl + "/blogCategory/";
-    }
-
-    @When("a GET request is sent with valid token")
-    public void sendGetWithValidToken() {
-        response = given()
-                .header("Authorization", validToken)
-                .when()
-                .get(endpoint);
-    }
-
-    @When("a GET request is sent with invalid token")
-    public void sendGetWithInvalidToken() {
-        response = given()
-                .header("Authorization", invalidToken)
-                .when()
-                .get(endpoint);
-    }
-
-    @When("a GET request is sent without authorization")
-    public void sendGetWithoutAuth() {
-        response = when().get(endpoint);
-    }
-
-    @Then("the response message should be {string}")
-    public void verifyResponseMessage(String message) {
-        response.then().body("response.response_message", equalTo(message));
-    }
-
-    @Then("the blog category details should be present")
-    public void verifyCategoryDetails() {
-        response.then()
-                .body("data[0].id", notNullValue())
-                .body("data[0].lang_id", notNullValue())
-                .body("data[0].name", notNullValue())
-                .body("data[0].slug", notNullValue())
-                .body("data[0].description", notNullValue())
-                .body("data[0].keywords", notNullValue())
-                .body("data[0].category_order", notNullValue())
-                .body("data[0].status", notNullValue())
-                .body("data[0].createdAt", notNullValue())
-                .body("data[0].createdBy", notNullValue())
-                .body("data[0].updatedAt", notNullValue())
-                .body("data[0].updatedBy", notNullValue());
+        System.out.println("PATCH Request Body: " + requestBody);
     }
 }
