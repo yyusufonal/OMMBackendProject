@@ -179,8 +179,15 @@ public class Manage {
     /**
      * US_25
      **/
-    private String US25_user_limit_count_service_coupons = "SELECT * FROM u201212290_onlinemasterqa.service_coupons WHERE user_limit_count >= user_limit;";
+    protected String US25_user_limit_count_service_coupons = "SELECT * FROM u201212290_onlinemasterqa.service_coupons WHERE user_limit_count >= user_limit;";
 
+    protected String US25_check_coupon_before_update = "SELECT * FROM u201212290_onlinemasterqa.service_coupons WHERE id = 84;";
+
+    protected String US25_update_coupon_user_limit = "UPDATE u201212290_onlinemasterqa.service_coupons " +
+                                                    "SET user_limit_count = user_limit " +
+                                                    "WHERE id = 84;";
+
+    protected String US25_check_updated_coupon = "SELECT * FROM u201212290_onlinemasterqa.service_coupons WHERE id = 84;";
 
     /**
      * US_27
