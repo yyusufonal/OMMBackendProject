@@ -114,6 +114,10 @@ public class SeyyidDBStepdef {
 		closeConnection();
 	}
 
-
+	@Then("Verify that {int} added to the table")
+	public void verify_that_added_to_the_table(int expectedRowCount) throws SQLException {
+		int actualRowCount = preparedStatement.executeUpdate();
+		assertEquals("Veri eklenemedi!", expectedRowCount, actualRowCount);
+	}
 
 }
