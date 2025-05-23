@@ -31,12 +31,15 @@
     <last-used-providers />
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
-    <open-files />
+    <open-files>
+      <object connection-id="63cd3fc7-c840-4a81-8afb-492500a9fa1d" object-ref="consoles/DB_PROJE" />
+    </open-files>
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
     <connection id="63cd3fc7-c840-4a81-8afb-492500a9fa1d" />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="63cd3fc7-c840-4a81-8afb-492500a9fa1d" dataset="u201212290_onlinemasterqa.administrators" active-filter-id="" />
     <filter-actions connection-id="63cd3fc7-c840-4a81-8afb-492500a9fa1d" dataset="u201212290_onlinemasterqa.admin_commission" active-filter-id="" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
@@ -77,7 +80,7 @@
           <token-type value="" />
           <token-config-file value="" />
           <token-profile value="" />
-          <session-user value="u201212290_onlineuserqa@46.197.52.167" />
+          <session-user value="u201212290_onlineuserqa@88.248.218.150" />
         </database>
         <properties>
           <auto-commit value="false" />
