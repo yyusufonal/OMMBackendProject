@@ -25,6 +25,7 @@ import static org.junit.Assert.assertEquals;
 public class EmreDBStepdef extends Manage {
 
     CommonData data = new CommonData();
+    int augustEmployeeCount;
 
     public EmreDBStepdef() throws SQLException {
 
@@ -77,4 +78,22 @@ public class EmreDBStepdef extends Manage {
 
         }
     }
+    @When("I calculate the total number of employees who joined in August in employee_basic_details table")
+    public void i_calculate_the_total_number_of_employees_joined_in_august() throws SQLException {
+        query = getUS39_august_joined_employee_count();
+        preparedStatement = getPraperedStatement(query);
+        resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            augustEmployeeCount = resultSet.getInt("august_count");
+        } else {
+            augustEmployeeCount = 0;
+        }
+    }
+
+    @Then("The number of employees joined in August should be verified")
+    public void the_number_of_employees_joined_in_august_should_be_verified() {
+        System.out.println("August Employee Count: " + augustEmployeeCount);
+
+    }
+
 }
