@@ -60,4 +60,39 @@ public class CemDB_StepDefinition extends Manage {
         Assert.assertTrue("Mesaj sayısı 0 ya da daha az", messageCount > 0);
     }
 
+    @Given("the database connection is established")
+    public void theDatabaseConnectionIsEstablished() {
+        JDBC_Structure_Methods.createConnection();
+    }
+
+    @When("the products with discounted price at least {int} percent higher than normal price are queried")
+    public void theProductsWithDiscountedPriceAtLeastPercentHigherThanNormalPriceAreQueried(int arg0) {
+        JDBC_Structure_Methods.query = "SELECT * FROM products WHERE sale_price >= price * 1.20";
+        try {
+            resultSet = JDBC_Structure_Methods.getStatement().executeQuery(JDBC_Structure_Methods.query);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Query failed: " + e.getMessage());
+        }
+    }
+
+    @Then("each listed product's discounted price should be equal to or greater than {int} percent of its normal price")
+    public void eachListedProductSDiscountedPriceShouldBeEqualToOrGreaterThanPercentOfItsNormalPrice(int arg0) {
+        try {
+            while (resultSet.next()) {
+                double price = resultSet.getDouble("price");
+                double salePrice = resultSet.getDouble("sale_price");
+                Assert.assertTrue(
+                        "Sale price is not at least 20% higher: " + salePrice + " < " + (price * 1.20),
+                        salePrice >= price * 1.20
+                );
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Error verifying results: " + e.getMessage());
+        } finally {
+            JDBC_Structure_Methods.closeConnection();
+        }
+    }
+
 }
