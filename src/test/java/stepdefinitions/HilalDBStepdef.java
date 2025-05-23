@@ -21,12 +21,42 @@ import static helperDB.CommonData.*;
 import static helperDB.ShopService.generateServices;
 import static org.junit.Assert.*;
 
-public class HilalDBStepdef extends Manage{
+public class HilalDBStepdef extends Manage {
 
     CommonData data;
 
     public HilalDBStepdef() throws SQLException {
         data = new CommonData();
+    }
+
+    @Given("Database connection established and coupon limit updated.")
+    public void databaseConnectionEstablishedWithCouponUpdate() throws SQLException {
+        // First establish database connection
+        JDBC_Structure_Methods.createConnection();
+        
+        // Check coupon state before update
+        List<Map<String, Object>> beforeUpdate = JDBCMethods.getQueryResultMap(US25_check_coupon_before_update);
+        assertFalse("Coupon with ID 84 not found", beforeUpdate.isEmpty());
+        
+        // Then update the coupon's user limit count
+        JDBCMethods.update(US25_update_coupon_user_limit);
+        
+        // Verify the update
+        List<Map<String, Object>> afterUpdate = JDBCMethods.getQueryResultMap(US25_check_updated_coupon);
+        assertFalse("Coupon update failed", afterUpdate.isEmpty());
+        
+        // Verify that user_limit_count equals user_limit
+        Map<String, Object> updatedCoupon = afterUpdate.get(0);
+        Object userLimitCountObj = updatedCoupon.get("user_limit_count");
+        Object userLimitObj = updatedCoupon.get("user_limit");
+        
+        assertNotNull("User limit count is null", userLimitCountObj);
+        assertNotNull("User limit is null", userLimitObj);
+        
+        int userLimitCount = ((Number) userLimitCountObj).intValue();
+        int userLimit = ((Number) userLimitObj).intValue();
+        
+        assertEquals("User limit count does not match user limit", userLimit, userLimitCount);
     }
 
     @When("The user executes the query to get services with their coupons")
@@ -91,6 +121,37 @@ public class HilalDBStepdef extends Manage{
             } catch (Exception e) {
                 fail("Invalid date format: " + endDateObj + ". Error: " + e.getMessage());
             }
+        }
+    }
+
+    @When("The user executes the query to get coupons that reached maximum user limit")
+    public void theUserExecutesTheQueryToGetCouponsThatReachedMaximumUserLimit() {
+        String query = US25_user_limit_count_service_coupons;
+        JDBCMethods.executeQuery(query);
+    }
+
+    @Then("The user verifies that the coupons have reached their user limit")
+    public void theUserVerifiesThatTheCouponsHaveReachedTheirUserLimit() {
+        List<Map<String, Object>> results = JDBCMethods.getQueryResultMap(US25_user_limit_count_service_coupons);
+        assertFalse("No coupons found that reached maximum user limit", results.isEmpty());
+    }
+
+    @Then("The user verifies that the user limit count is greater than or equal to user limit")
+    public void theUserVerifiesThatTheUserLimitCountIsGreaterThanOrEqualToUserLimit() {
+        List<Map<String, Object>> results = JDBCMethods.getQueryResultMap(US25_user_limit_count_service_coupons);
+        
+        for (Map<String, Object> row : results) {
+            Object userLimitCountObj = row.get("user_limit_count");
+            Object userLimitObj = row.get("user_limit");
+            
+            assertNotNull("User limit count is null", userLimitCountObj);
+            assertNotNull("User limit is null", userLimitObj);
+            
+            int userLimitCount = ((Number) userLimitCountObj).intValue();
+            int userLimit = ((Number) userLimitObj).intValue();
+            
+            assertTrue("User limit count (" + userLimitCount + ") is less than user limit (" + userLimit + ")",
+                      userLimitCount >= userLimit);
         }
     }
 }
