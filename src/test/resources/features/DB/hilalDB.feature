@@ -8,4 +8,9 @@ Feature: US_002,US_025 and US_040 Database testing
         And The user verifies that the coupon end dates are in correct format
         And Database closed.
 
-
+    Scenario: List the coupons that have reached the maximum user limit
+        Given Database connection established and coupon limit updated.
+        When The user executes the query to get coupons that reached maximum user limit
+        Then The user verifies that the coupons have reached their user limit
+        And The user verifies that the user limit count is greater than or equal to user limit
+        And Database closed.
