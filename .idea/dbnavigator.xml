@@ -93,7 +93,11 @@ VALUES
           <token-type value="" />
           <token-config-file value="" />
           <token-profile value="" />
+
           <session-user value="u201212290_onlineuserqa@88.248.218.150" />
+
+          <session-user value="u201212290_onlineuserqa@176.233.219.190" />
+
         </database>
         <properties>
           <auto-commit value="false" />

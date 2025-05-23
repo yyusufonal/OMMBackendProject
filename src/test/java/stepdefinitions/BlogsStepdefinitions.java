@@ -86,7 +86,7 @@ public class BlogsStepdefinitions {
 
     @When("The api user prepares a post request without any data to send to the api addBlog endpoint.")
     public void the_api_user_prepares_a_post_request_without_any_data_to_send_to_the_api_add_blog_endpoint() {
-        // Boş body
+
     }
 
     @Then("The api user prepares a patch request body to send to the api editBlog endpoint")
