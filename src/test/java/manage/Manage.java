@@ -189,4 +189,47 @@ public class Manage {
             "VALUES (?, ?, ?, ?, ?)";
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private String US39_august_joined_employee_count =
+            "SELECT COUNT(*) AS august_count FROM u201212290_onlinemasterqa.employee_basic_details WHERE MONTH(created_at) = 8";
+
 }
