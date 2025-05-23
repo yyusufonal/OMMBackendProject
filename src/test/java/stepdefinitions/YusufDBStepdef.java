@@ -7,13 +7,13 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import manage.Manage;
+import org.junit.Assert;
+
 import static helperDB.JDBC_Structure_Methods.*;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 import static helperDB.CommonData.*;
 import static helperDB.ShopService.generateServices;
@@ -93,6 +93,32 @@ public class YusufDBStepdef extends Manage {
 
     }
 
+    @Then("Prepare query for deleted into the bank_account table.")
+    public void prepare_query_for_deleted_into_the_bank_account_table() throws SQLException {
+        query =getUS08deleted_data_inactive();
+        rowCount = getStatement().executeUpdate(query);
+
+    }
+    @Then("Verify that any data deleted.")
+    public void verify_that_any_data_deleted() {
+        Assert.assertTrue(rowCount > 0);
+        System.out.println(rowCount+"  ADET İNAKTİF KAYIT SİLİNDİ");
+
+    }
+
+    @Then("Create a statement to list categories from oldest to most recent")
+    public void create_a_statement_to_list_categories_from_oldest_to_most_recent() throws SQLException {
+        query =getUS15oldest_newest_categorie();
+        resultSet=getStatement().executeQuery(query);
+    }
+    @When("Confirm the query yields category data")
+    public void confirm_the_query_yields_category_data() throws SQLException {
+        while (resultSet.next()) {
+            java.util.Date newest_category = resultSet.getDate("newest_category");
+            Date oldest_category = resultSet.getDate("oldest_category");
+            System.out.printf("newest_category: %s, oldest_category: %s", newest_category, oldest_category);
 
 
+        }
+    }
 }
