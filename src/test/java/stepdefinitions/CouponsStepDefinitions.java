@@ -150,7 +150,7 @@ public class CouponsStepDefinitions {
                     .statusCode(203)
                     .extract()
                     .response();
-            
+
             // Set the response message manually since we're mocking the response
             response.then()
                     .body("response.response_message", Matchers.equalTo("Missing required fields"));
@@ -191,7 +191,7 @@ public class CouponsStepDefinitions {
                 .header("Authorization", "Bearer invalid_token_123")
                 .when()
                 .get(API_Methods.fullPath);
-        
+
         response.prettyPrint();
     }
 
@@ -213,7 +213,7 @@ public class CouponsStepDefinitions {
                     .statusCode(203)
                     .extract()
                     .response();
-            
+
             // Set the response message manually since we're mocking the response
             response.then()
                     .body("response.response_message", Matchers.equalTo("Id missing"));
@@ -241,8 +241,8 @@ public class CouponsStepDefinitions {
     @And("The api user verifies that the {string} information in the response body is the same as the {string} path parameter.")
     public void theApiUserVerifiesThatTheInformationInTheResponseBodyIsTheSameAsThePathParameter(String responsePath, String pathParam) {
         if (response != null) {
-            String responseId = response.jsonPath().getString("data.updated_coupon_id");
-            String pathParamValue = String.valueOf(API_Methods.id); // Get the coupon_id from the API_Methods class
+            String responseId = response.jsonPath().getString(responsePath);
+            String pathParamValue = String.valueOf(createdCouponId); // Get the coupon_id that was stored
             Assert.assertEquals("Response ID does not match path parameter ID", pathParamValue, responseId);
         }
     }
@@ -282,6 +282,5 @@ public class CouponsStepDefinitions {
     }
 
 }
-
 
 

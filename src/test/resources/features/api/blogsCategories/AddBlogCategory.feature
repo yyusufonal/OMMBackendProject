@@ -5,12 +5,11 @@ Feature: As a provider, I want to be able to create a new blog category record v
   'Blog Category added successfully' and the creation of the new blog category is confirmed via the API.
 
     Given The api user constructs the base url with the "provider" token.
-
     * The api user sets "api/addBlogCategory" path parameters.
     * The api user prepares a POST request containing "<name>" and "<description>" information to send to the api addBlogCategory endpoint.
-    * The api user sends a POST request and saves the returned response.
-    * The api user verifies that the status code is 200.
-    * The api user verifies that the "response.response_message" information in the response body is "Blog Category added successfully".
+    * The api user sends a POST request and saves the returned response to blog category.
+    * The api user verifies that the status code is 200 to blog category.
+    * The api user verifies that in blog category "response.response_message" information in the response body is "Blog Category added successfully".
 
     Examples:
       | name          | description                |

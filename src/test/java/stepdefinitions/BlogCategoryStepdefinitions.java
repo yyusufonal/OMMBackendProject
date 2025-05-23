@@ -1,25 +1,23 @@
 package stepdefinitions;
 
 import config_Requirements.ConfigLoader;
+import hooks.HooksAPI;
 import io.cucumber.java.en.Given;
+import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import io.restassured.path.json.JsonPath;
 import org.json.JSONObject;
 import utilities.API_Utilities.API_Methods;
 import utilities.API_Utilities.TestData;
-import static stepdefinitions.API_Stepdefinitions.jsonObjectRequest;
-import static stepdefinitions.API_Stepdefinitions.*;
 
+import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
+import static stepdefinitions.API_Stepdefinitions.*;
+import static stepdefinitions.API_Stepdefinitions.response;
 
 public class BlogCategoryStepdefinitions {
 
-    public static Response response;
-    public static JsonPath jsonPath;
-    public static String exceptionMesaj;
-    public static ConfigLoader configLoader = new ConfigLoader();
-    public static JSONObject requestBody;
-    public static TestData builder = new TestData(); // Assuming you have a TestData builder class
+
 
     @Given("The api user verifies the information in the response body for the entry with the specified {int} index, including {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string}, {string} and {string}.")
     public void verify_response_data_by_index(int dataindex, String lang_id, String name, String slug, String description, String keywords, String category_order, String status, String createdAt, String createdBy, String updatedAt, String updatedBy) {
@@ -55,18 +53,43 @@ public class BlogCategoryStepdefinitions {
     }
 
     @Given("The api user prepares a POST request containing {string} and {string} information to send to the api addBlogCategory endpoint.")
-    public void the_api_user_prepares_a_post_request_containing_and_information_to_send_to_the_api_add_blog_category_endpoint(String string, String string2) {
-        jsonObjectRequest.put( "name" , "New Blog Category") ;
-        jsonObjectRequest.put( "description" , "blog category description.") ;
+    public void the_api_user_prepares_a_post_request_containing_and_information_to_send_to_the_api_add_blog_category_endpoint(String name, String description) {
+        jsonObjectRequest.put( "name" , name) ;
+        jsonObjectRequest.put( "description" , description) ;
         System.out.println("postbody" + jsonObjectRequest);
     }
 
-    @Given("The api user sends a {string} request and saves the returned response.")
-    public void the_api_user_sends_a_request_and_saves_the_returned_response(String string) {
+    @Given("The api user sends a POST request and saves the returned response to blog category.")
+    public void the_api_user_sends_a_post_request_and_saves_the_returned_response_to_blog_category() {
+
+        response = given()
+                .spec(HooksAPI.spec)
+                .contentType(ContentType.JSON)
+                .when()
+                .body(jsonObjectRequest.toString())
+                .post(API_Methods.fullPath);
+
+        response.prettyPrint();
+
     }
 
-    @Given("The api user verifies that the {string} is {string} by sending a GET request to the {string} {string} endpoint with the {string} returned in the response body.")
-    public void the_api_user_verifies_that_the_is_by_sending_a_get_request_to_the_endpoint_with_the_returned_in_the_response_body(String string, String string2, String string3, String string4, String string5) {
+    @Given("The api user verifies that the status code is {int} to blog category.")
+    public void the_api_user_verifies_that_the_status_code_is_to_blog_category(Integer code) {
+        response.then()
+                .assertThat()
+                .statusCode(code);
     }
+
+    @Given("The api user verifies that in blog category {string} information in the response body is {string}.")
+    public void the_api_user_verifies_that_in_blog_category_information_in_the_response_body_is(String key, String value) {
+        response.then()
+                .assertThat()
+                .body(key,equalTo(value));
+    }
+
+
+
+
+
 
 }

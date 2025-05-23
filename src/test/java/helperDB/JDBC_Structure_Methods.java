@@ -70,4 +70,5 @@ public class JDBC_Structure_Methods {
         return preparedStatement;
     }
 
+
 }

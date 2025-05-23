@@ -53,8 +53,8 @@ public class Manage {
     /**
      * US_08
      */
-    private String US08deleted_data_inactive = "DELETE FROM  u201212290_onlinemasterqa.bank_account\n" +
-            "WHERE status = 'inactive';";
+    private String US08deleted_data_inactive = "DELETE FROM u201212290_onlinemasterqa.bank_account\n" +
+            "WHERE status = 'inactive' LIMIT 1;";
     /**
      * US_09
      */
@@ -188,5 +188,48 @@ public class Manage {
     private String US27_user_incomplate_data_insert = "INSERT INTO u201212290_onlinemasterqa.users (mobileno, country_code, currency_code, status, usertype)\n" +
             "VALUES (?, ?, ?, ?, ?)";
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private String US39_august_joined_employee_count =
+            "SELECT COUNT(*) AS august_count FROM u201212290_onlinemasterqa.employee_basic_details WHERE MONTH(created_at) = 8";
 
 }
