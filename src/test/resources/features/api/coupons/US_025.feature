@@ -1,6 +1,6 @@
-Feature: PATCH Coupons Scenarios
+Feature: DELETE Coupons Scenarios
 
-
+  @API
   Scenario Outline: Create a coupon to delete and store the coupon id
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addCoupon" path parameters.
@@ -19,7 +19,7 @@ Feature: PATCH Coupons Scenarios
     Examples:
       | service_id | percentage | start_date | valid_days | user_limit | description  |
       | 168        | 20         | 2024-07-17 | 15         | 10         | Coupon Desc. |
-
+  @API
   Scenario Outline: When a DELETE request is sent to the /api/deleteCoupon/{id} endpoint that does not contain valid authorization information and (id), it should be verified that the status code returned is 203 and the response_message in the response body is "Id missing".
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addCoupon" path parameters.
@@ -38,7 +38,7 @@ Feature: PATCH Coupons Scenarios
     Examples:
       | service_id | percentage | start_date | valid_days | user_limit | description  |
       | 168        | 20         | 2024-07-17 | 15         | 10         | Coupon Desc. |
-
+  @API
   Scenario Outline: When a DELETE request is sent to the /api/deleteCoupon/{id} endpoint with valid authorization information and an unregistered (id), the status code returned is 203 and the response_message in the response body is "Coupon not found. Invalid ID." should be verified.
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addCoupon" path parameters.
@@ -57,12 +57,12 @@ Feature: PATCH Coupons Scenarios
     Examples:
       | service_id | percentage | start_date | valid_days | user_limit | description  |
       | 168        | 20         | 2024-07-17 | 15         | 10         | Coupon Desc. |
-
+  @API
   Scenario: When a DELETE request is sent to the /api/deleteCoupon/{id} endpoint with invalid (invalid API key) authorization information, it should be verified that the status code returned is 401 and the response_message in the response body is "Invalid token or token missing".
     Given The api user constructs the base url with the "invalid" token.
     And The api user sets "api/deleteCoupon" path parameters.
     Then The api user sends a DELETE request, saves the returned response, and verifies that the status code is "401" with the reason phrase Unauthorized.
-
+  @API
   Scenario Outline: Verify that the deleted_coupon_id in the response body returned from the /api/deleteCoupon/{id} endpoint is the same as the id path parameter in the /api/deleteCoupon/{id} endpoint.
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addCoupon" path parameters.

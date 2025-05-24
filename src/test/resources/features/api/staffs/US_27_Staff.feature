@@ -1,6 +1,6 @@
 Feature: As a provider, I should be able to access the detailed information of the staff with the specified id number via API connection.
 
-
+  @API
   Scenario: TC001 - Validate Staff Detail Response with Valid ID
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/staff-detail/163" path parameters.
@@ -16,7 +16,7 @@ Feature: As a provider, I should be able to access the detailed information of t
     And The api user prepares a post request body to send to the api addStaff endpoint
     And The api user sends a GET request and saves the returned response.
     Then The api user verifies that the status code is 200.
-    And The api user verifies that the "response.response_message" information in the response body is "Staff added successfully".
+    And The api user verifies that the "response.response_message" information in the response body is "Staff Details".
 
     And The api user sets "api/addStaff" path parameters.
     And The api user prepares an invalid post request body to send to the api addStaff endpoint
@@ -26,7 +26,7 @@ Feature: As a provider, I should be able to access the detailed information of t
 
 
 
-
+  @API
   Scenario: TC001 - Get staff list with invalid token
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addStaff" path parameters.

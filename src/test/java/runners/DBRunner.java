@@ -14,9 +14,9 @@ import org.junit.runner.RunWith;
                 "io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm", // Allure raporları için plugin
                 "rerun:target/failedRerun.txt"
         },
-        features = {"src/test/resources/features/api","src/test/resources/features/DB"},
+        features = {"src/test/resources/features/DB"},
         glue = {"stepdefinitions","hooks","utilities"},
-        tags = "@API",
+        tags = "@DB",
         dryRun =false
 
 

@@ -1,6 +1,6 @@
  Feature: US_029 As a provider, I want to be able to update the information of the staff with the specified id number via API connection.
 
-
+   @API
   Scenario Outline: TC001 Verify that a PATCH request to /api/editStaff/{id} with valid authorization and correct data
   (firstname, mobileno, email, gender, shop_id, about_emp) returns status code 200, response_message “Staff updated successfully”,
   and updated_staff_id in the response body matches the id in the path parameter.
@@ -17,7 +17,7 @@
       | id  |
       | 184 |
 
-
+   @API
   Scenario Outline: TC002 Verify that a PATCH request to /api/editStaff/{id} with valid authorization and partial data (firstname, email)
   returns status code 200 and response_message “Staff updated successfully”.
 
@@ -31,7 +31,7 @@
     Examples:
       | id  |
       | 184 |
-
+   @API
   Scenario Outline: TC003 Verify that a PATCH request to /api/editStaff/{id} with valid authorization and no data
   returns status code 203 and the response_message "No data to update".
 
@@ -45,7 +45,7 @@
     Examples:
       | id  |
       | 184 |
-
+   @API
   Scenario: TC004 Verify that a PATCH request to /api/editStaff without an id and with valid data
   returns status code 203 and the response_message “Id missing”.
 
@@ -70,7 +70,7 @@
     Examples:
       | id  |
       | 999 |
-
+   @API
   Scenario Outline: TC006 Verify that a PATCH request to /api/editStaff/{id} with invalid token and valid data
   returns status code 401 and the reason phrase Unauthorized.
 

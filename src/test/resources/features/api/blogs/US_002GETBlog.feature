@@ -1,6 +1,6 @@
 Feature: As a provider, I should be able to access the detailed information of the blog with the specified
   id number through the API connection.
-
+  @API
   Scenario Outline: Verify that a GET request to /api/blog/{id} with valid authorization and correct id returns status
   code 200, response_message “Blog  Details”, and that all expected blog fields are present in the response body.
 
@@ -15,7 +15,7 @@ Feature: As a provider, I should be able to access the detailed information of t
       | id | data_id | lang_id | title              | slug      | tags | summary     |
       | 2  | 2       | 1       | New Blog Updated   | PC90      |      | Blog Summary|
 
-
+  @API
   Scenario: Verify that a GET request to /api/blog/{id} without valid authorization and id returns status code 203 and
   response_message “Id missing”.
 
@@ -25,7 +25,7 @@ Feature: As a provider, I should be able to access the detailed information of t
     Then The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "Id missing".
 
-
+  @API
   Scenario: Verify that a GET request to /api/blog/{id} with valid authorization and an unregistered id returns status
   code 203 and response_message “No Details for this id.”.
 
@@ -36,7 +36,7 @@ Feature: As a provider, I should be able to access the detailed information of t
     And The api user verifies that the "response.response_message" information in the response body is "No Details for this id.".
 
 
-
+  @API
   Scenario: Verify that a GET request to /api/blog/{id} with an invalid API key returns status code 401 and
   response_message “Invalid token or token missing”.
 
