@@ -95,4 +95,48 @@ public class CemDB_StepDefinition extends Manage {
         }
     }
 
+    @Given("a database connection is established")
+    public void aDatabaseConnectionIsEstablished() {
+        JDBC_Structure_Methods.createConnection();
+    }
+
+    @Then("Insert a test payment row to ensure delete can be verified")
+    public void insertATestPaymentRowToEnsureDeleteCanBeVerified() {
+        try {
+            String insertQuery = "INSERT INTO payments (" +
+                    "currency_code, payer_email, payment_gross, payment_status, product_id, txn_id, user_id) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+            PreparedStatement ps = JDBC_Structure_Methods.getPraperedStatement(insertQuery);
+            ps.setString(1, "USD");
+            ps.setString(2, "testuser@example.com");
+            ps.setDouble(3, 100.00);
+            ps.setString(4, "Completed");
+            ps.setInt(5, 1); // product_id (mevcut ID olmalı)
+            ps.setString(6, "TXN_TEST_DELETE"); // kullanılacak txn_id
+            ps.setInt(7, 1); // user_id (mevcut ID olmalı)
+
+            int result = ps.executeUpdate();
+            Assert.assertEquals("Insert failed!", 1, result);
+            System.out.println("Test payment row inserted with txn_id = TXN_TEST_DELETE");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Error inserting test payment: " + e.getMessage());
+        }
+    }
+
+    @Then("Prepare delete query for payments with given txn_id and status")
+    public void prepareDeleteQueryForPaymentsWithGivenTxn_idAndStatus() throws SQLException  {
+        query = "DELETE FROM payments WHERE txn_id = 'TXN_TEST_DELETE' AND payment_status = 'Completed'";
+        rowCount = JDBC_Structure_Methods.getStatement().executeUpdate(query);
+    }
+
+    @And("Verify that at least one payment row was deleted")
+    public void verifyThatAtLeastOnePaymentRowWasDeleted() {
+        Assert.assertTrue("No rows were deleted", rowCount > 0);
+        System.out.println(rowCount + " payment record(s) deleted.");
+    }
+
+
 }
