@@ -1,5 +1,5 @@
 Feature: API_US058 - As a provider, I want to be able to create a new product record via API connection.
-
+  @API
   Scenario Outline: TC001 - Successful product creation and creation verification
     #AC1
     Given The api user constructs the base url with the "provider" tokenN.
@@ -17,9 +17,10 @@ Feature: API_US058 - As a provider, I want to be able to create a new product re
 
     Examples:
     |id|
-    |89|
+    |156|
 
   #AC2
+  @API
   Scenario: TC002 - Product creation with missing or empty data
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/addProduct" path parameters.
@@ -36,6 +37,7 @@ Feature: API_US058 - As a provider, I want to be able to create a new product re
     Then The api user verifies that the "response.response_message" information in the response body is "Add product failed, required fields empty.".
 
   #AC4
+  @API
   Scenario: TC003 - Invalid authorization token with valid product data
     Given The api user constructs the base url with the "invalid" token.
     Then The api user sets "api/addProduct" path parameters.

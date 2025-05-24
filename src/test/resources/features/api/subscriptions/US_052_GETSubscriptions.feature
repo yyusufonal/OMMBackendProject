@@ -1,5 +1,5 @@
 Feature: As a provider, I should be able to access the detailed information of the subscription with the specified id number through the API connection.
-
+  @API
   Scenario Outline: Verify that GET /api/subscription_details/{id} returns status 200, correct message, and complete subscription details for a valid request.
 
      Given The api user constructs the base url with the "provider" token.
@@ -19,7 +19,7 @@ Feature: As a provider, I should be able to access the detailed information of t
       |dataIndex|id         | subscription_name |fee   | currency_code |duration | fee_description    | subscription_content | subscription_type | status | type |
       |0        |1          | Premium           |99.99 |USD          | 12    |Annual Subscription     | Only one shop        |1                  |1       |1     |
 
-
+  @API
   Scenario: Verify that a GET request to /api/blog/{id} without valid authorization and id returns status code 203 and
   response_message “Id missing”.
 
@@ -28,13 +28,13 @@ Feature: As a provider, I should be able to access the detailed information of t
     Then The api user sends a GET request and saves the returned response.
     When The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "Id missing".
-
+  @API
   Scenario: GET request to /api/blog/{id} with an invalid API key returns status code 401 and response_message “Invalid token or token missing”
 
     Given The api user constructs the base url with the "invalid" token.
     And The api user sets "api/subscription_details/1" path parameters.
     Then The api user sends a GET request, saves the returned response, and verifies that the status code is '401' with the reason phrase Unauthorized.
-
+  @API
   Scenario: GET /api/subscription_details/{id} with valid token and unregistered id returns 203 and expected message
 
     Given The api user constructs the base url with the "provider" token.

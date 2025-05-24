@@ -1,7 +1,7 @@
 Feature: US_0027 Staff API Test
 
 
-
+  @API
   Scenario: TC001 - Get staff list with valid token
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addStaff" path parameters.
@@ -13,7 +13,7 @@ Feature: US_0027 Staff API Test
 
 
 
-
+  @API
   Scenario: TC002 - Get staff list with invalid token
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addStaff" path parameters.
@@ -24,7 +24,7 @@ Feature: US_0027 Staff API Test
 
 
 
-
+  @API
   Scenario: TC003 - Get staff list with invalid token
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addStaff" path parameters.
@@ -35,7 +35,7 @@ Feature: US_0027 Staff API Test
 
 
 
-
+  @API
   Scenario: TC004 - Get staff list with invalid token
     Given The api user constructs the base url with the "invalidApiKey" token.
     And The api user sets "api/addStaff" path parameters.

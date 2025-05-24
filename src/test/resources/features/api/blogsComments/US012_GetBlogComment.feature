@@ -1,5 +1,5 @@
 Feature: As a provider, I should be able to access the detailed information of the blog comment with the specified id number through the API connection.
-
+  @API
   Scenario Outline: TC001-002 Verify that a GET request to /api/blogComment/{id} with valid authorization and correct id returns status code 200, response_message “Blog  Comment Details”, and that all expected fields are present in the response body.
 
     * The api user constructs the base url with the "provider" token.
@@ -12,7 +12,7 @@ Feature: As a provider, I should be able to access the detailed information of t
     Examples:
       | id | data_id | post_id | user_id | email              | name     | comment                                                  | ip_address | status | created_at          |
       | 34 | 34      | 2       | 4       | anthony@gmail.com  | Anthony  | Please write more about this topic.     | 127.1.1.1  | 1      | 2025-05-16 20:46:42 |
-
+  @API
   Scenario: TC003 Verify that a GET request to /api/blogComment/{id} without id returns status code 203 and response_message “Id missing”
 
     * The api user constructs the base url with the "provider" token.
@@ -20,7 +20,7 @@ Feature: As a provider, I should be able to access the detailed information of t
     * The api user sends a GET request and saves the returned response.
     * The api user verifies that the status code is 203.
     * The api user verifies that the "response.response_message" information in the response body is "Id missing".
-
+  @API
   Scenario: TC004 Verify that a GET request to /api/blogComment/{id} with valid authorization and unregistered id returns status code 203 and response_message “No Details for this id.”
 
     * The api user constructs the base url with the "provider" token.
@@ -28,7 +28,7 @@ Feature: As a provider, I should be able to access the detailed information of t
     * The api user sends a GET request and saves the returned response.
     * The api user verifies that the status code is 203.
     * The api user verifies that the "response.response_message" information in the response body is "No Details for this id.".
-
+  @API
   Scenario: TC005 Verify that a GET request to /api/blogComment/{id} with an invalid API key returns status code 401 and response_message “Invalid token or token missing”
 
     * The api user constructs the base url with the "invalid" token.

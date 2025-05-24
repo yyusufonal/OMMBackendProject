@@ -1,6 +1,6 @@
 Feature: As a provider, I want to be able to delete subscription information with the specified ID number via the API connection
 
-
+  @API
   Scenario: Verify that a DELETE request to /api/deleteSubscription/{id} with valid authorization and correct id returns status
   code 200, response_message “Blog deleted successfully”, and that deleted_blog_id in the response matches the path
   parameter id.
@@ -13,7 +13,7 @@ Feature: As a provider, I want to be able to delete subscription information wit
     Then The api user verifies that the "data.deleted_subscription_id" information in the response body is the same as the id path parameter in the endpoint.
 
 
-
+  @API
   Scenario: Verify that a DELETE request to /api/deleteSubscription/{id} with valid authorization but missing id returns status
   code 203 and response_message “Id missing”.
 
@@ -24,7 +24,7 @@ Feature: As a provider, I want to be able to delete subscription information wit
     Then The api user verifies that the "response.response_message" information in the response body is "Id missing".
 
 
-
+  @API
   Scenario: Verify that a DELETE request to /api/deleteSubscription/{id} with valid authorization and a non-existent id returns
   status code 203 and response_message “Subscription not found. Invalid ID.”
 
@@ -35,7 +35,7 @@ Feature: As a provider, I want to be able to delete subscription information wit
     Then The api user verifies that the "response.response_message" information in the response body is "Subscription not found. Invalid ID.".
 
 
-
+  @API
   Scenario: Verify that a DELETE request to /deleteSubscription/{id} with an invalid API key returns status code 401 and
   response_message “Invalid token or token missing”.
 
@@ -45,7 +45,7 @@ Feature: As a provider, I want to be able to delete subscription information wit
 
 
 
-
+  @API
   Scenario: Verify that the deleted blog is successfully removed via API by sending a GET request to /api/blog/{id}
   using the deleted_blog_id returned in the DELETE response.
 

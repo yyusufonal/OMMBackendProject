@@ -1,5 +1,5 @@
 Feature: POST Coupons Scenarios
-
+  @API
   Scenario Outline: Create a coupon to delete and store the coupon id
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addCoupon" path parameters.
@@ -31,7 +31,7 @@ Feature: POST Coupons Scenarios
     And The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "Missing required fields".
 
-  
+  @API
   Scenario Outline: When a POST body (service_id, coupon_name, percentage, start_date, valid_days, user_limit, description) containing valid authorization information and the same name (coupon_name) is sent to the /api/addCoupon endpoint, it should be verified that the returned status code is 203 and the response_message information in the response body is "The Coupon Name is already exist."
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addCoupon" path parameters.
@@ -43,7 +43,7 @@ Feature: POST Coupons Scenarios
     Examples:
       | service_id | coupon_name | percentage | start_date | valid_days | user_limit | description  |
       | 170        | new | 20         | 2024-07-17 | 15         | 10         | Coupon Desc. |
-
+  @API
   Scenario Outline: When a POST body (service_id, coupon_name, percentage, start_date, valid_days, valid_days, user_limit, description) with valid authorization information and an invalid service_id is sent to /api/addCoupon endpoint, it should be verified that the status code returned is 203 and the response_message in the response body is “Invalid service id”.
     Given The api user constructs the base url with the "provider" token.
     And The api user sets "api/addCoupon" path parameters.
@@ -55,7 +55,7 @@ Feature: POST Coupons Scenarios
     Examples:
       | service_id | percentage | start_date | valid_days | user_limit | description  |
       | 16358      | 20         | 2024-07-17 | 15         | 10         | Coupon Desc. |
-
+  @API
   Scenario Outline: When sending a POST body with invalid (invalid API key) authorization information and correct data (service_id, coupon_name, percentage, start_date, valid_days, user_limit, description) to /api/addCoupon endpoint, it should be verified that the status code returned is 401 and the response_message in the response body is “Invalid token or token missing”
     Given The api user constructs the base url with the "invalid" token.
     And The api user sets "api/addCoupon" path parameters.

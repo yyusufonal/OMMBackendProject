@@ -1,5 +1,5 @@
 Feature: API_US057 - Product detail retrieval through API
-
+  @API
   Scenario Outline: TC001 - Valid authorization and valid product id
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/product-details/<id>" path parameters.
@@ -16,7 +16,7 @@ Feature: API_US057 - Product detail retrieval through API
 
     #(id, user_id, manufactured_by, shop_id, category, subcategory, product_name, unit, unit_name, unit_value, currency, currency_code, prices,
     # sales_price, product_discount, short_description, description, category_name, subcategory_name, shop_name, price, sale_price, discount
-
+  @API
   Scenario: TC002 - Missing or unregistered product id
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/product-details" path parameters.
@@ -30,7 +30,7 @@ Feature: API_US057 - Product detail retrieval through API
     Then The api user verifies that the status code is 203.
     And The api user verifies that the "response.response_message" information in the response body is "No Details found".
 
-
+  @API
   Scenario: TC003 - Invalid authorization
     Given The api user constructs the base url with the "invalid" token.
     Then The api user sets "api/product-details/11" path parameters.

@@ -1,6 +1,7 @@
 Feature: API_US060 - Product deletion via API
 
   #AC1-#AC5-#AC6
+  @API
   Scenario Outline: TC001 - Successful product deletion and verification
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/deleteProduct/<id>" path parameters.
@@ -17,9 +18,10 @@ Feature: API_US060 - Product deletion via API
 
     Examples:
       |id |
-      |77|
+      |89|
 
   #AC2-#AC3
+  @API
   Scenario: TC002 - Delete request with missing or invalid product ID
     Given The api user constructs the base url with the "provider" token.
     Then The api user sets "api/deleteProduct" path parameters.
@@ -34,6 +36,7 @@ Feature: API_US060 - Product deletion via API
     Then The api user verifies that the "response.response_message" information in the response body is "Product not found. Invalid ID.".
 
   #AC4
+  @API
   Scenario: TC003 - Delete request with invalid authorization
     Given The api user constructs the base url with the "invalid" token.
     Then The api user sets "api/deleteProduct/22" path parameters.
